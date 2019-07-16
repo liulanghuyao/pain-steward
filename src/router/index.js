@@ -55,7 +55,7 @@ let option = {
   }]
 }
 
-option.routes = params.routes.concat(patient);
+option.routes = option.routes.concat(patient);
 
 let router = new Router(option);
 
