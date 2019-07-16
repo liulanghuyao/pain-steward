@@ -7,9 +7,7 @@ import {
   Toast
 } from 'vant';
 
-let baseUrl = process.env.NODE_ENV === 'production' ? 'http://geosun777.com:7880/si-server/' : '/api/';
-// let baseUrl = process.env.NODE_ENV === 'production' ? 'http://192.168.1.118:8888/si-server/' : '/devl/';
-// let baseUrl = process.env.NODE_ENV === 'production' ? 'http://192.168.1.124:8888/si-server/' : '/local/';
+let baseUrl = process.env.NODE_ENV === 'production' ? 'http://www.bangche.net/' : '/api/';
 
 axios.defaults.baseURL = baseUrl;
 axios.defaults.timeout = 5000;
@@ -24,6 +22,14 @@ const ajax = {
   post: axios.create({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
+    transformRequest: [data => Qs.stringify(data, {
+      arrayFormat: 'brackets'
+    })],
+    paramsSerializer(params) {
+      return Qs.stringify(params, {
+        arrayFormat: 'brackets'
+      });
     },
     withCredentials: true,
   }),
@@ -41,7 +47,7 @@ function res(response) {
     Toast('身份验证已过期，请重新登录');
     store.dispatch('login/setLogin', false);
     router.push({
-      path: '/',
+      path: '/login',
       query: {
         back: true
       }
@@ -53,7 +59,7 @@ function res(response) {
  * 发送请求拦截
  */
 ajax.get.interceptors.request.use(config => {
-  storage.getItem('token') && (config.headers['token'] = storage.getItem('token'));
+  storage.getItem('Authorization') && (config.headers['Authorization'] = storage.getItem('Authorization'));
   return config;
 }, error => {
   return Promise.reject(error);
@@ -74,7 +80,7 @@ ajax.get.interceptors.response.use(response => {
  * 发送请求拦截
  */
 ajax.post.interceptors.request.use(config => {
-  storage.getItem('token') && (config.headers['token'] = storage.getItem('token'));
+  storage.getItem('Authorization') && (config.headers['Authorization'] = storage.getItem('Authorization'));
   return config;
 }, error => {
   return Promise.reject(error);
@@ -95,7 +101,7 @@ ajax.post.interceptors.response.use(response => {
  * 发送请求拦截
  */
 ajax.postJson.interceptors.request.use(config => {
-  storage.getItem('token') && (config.headers['token'] = storage.getItem('token'));
+  storage.getItem('Authorization') && (config.headers['Authorization'] = storage.getItem('Authorization'));
   return config;
 }, error => {
   return Promise.reject(error);
@@ -122,8 +128,8 @@ function get(url, params, loading) {
       }).then(({
         data
       }) => {
-        if (data && (data.code == 0 || data.success)) {
-          resolve(data.page || data);
+        if (data && data.code == 0) {
+          resolve(data);
         } else {
           reject(data);
         }
@@ -150,8 +156,8 @@ function post(url, data, loading) {
       ajax.post.post(url, data).then(({
         data
       }) => {
-        if (data && (data.code == 0 || data.success)) {
-          resolve(data.page || data);
+        if (data && data.code == 0) {
+          resolve(data);
         } else {
           reject(data);
         }
@@ -175,8 +181,8 @@ function postJson(url, data, loading) {
       ajax.postJson.post(url, data).then(({
         data
       }) => {
-        if (data && (data.code == 0 || data.success)) {
-          resolve(data.page || data);
+        if (data && data.code == 0) {
+          resolve(data);
         } else {
           reject(data);
         }

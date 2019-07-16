@@ -12,6 +12,8 @@ import storage from './utils/storage.js'
 import VueLazyload from 'vue-lazyload'
 import 'vant/lib/index.css'
 import './sdk/online'
+import 'amfe-flexible/index.js'
+import '@/assets/js/rem.js'
 
 Vue.use(VueLazyload)
 Vue.use(Mui);

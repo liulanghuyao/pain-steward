@@ -83,8 +83,9 @@
   }
 </script>
 
-<style>
-  @import url("assets/css/reset.css");
+<style lang="scss">
+  @import "assets/css/reset.scss";
+  @import "assets/css/public.scss";
 
   .van-nav-bar--fixed {
     z-index: 999 !important;
