@@ -1,14 +1,14 @@
 <template>
   <div class="wrap">
-    <mo-content class="white">
-      <div class="inp-box">
+    <mo-content class="white" :style="{padding:'0 20px'}">
+      <div class="inp-box border-b">
         <div class="label">账号</div>
         <div class="inp">
           <input type="text" v-model="dataForm.mobilephone" class="input" placeholder="请输入手机号">
           <van-button plain type="primary" class="btn">发送验证码</van-button>
         </div>
       </div>
-      <div class="inp-box">
+      <div class="inp-box border-b">
         <div class="label">验证码</div>
         <div class="inp">
           <input type="number" v-model="dataForm.yzm" class="input" placeholder="请输入短信验证码">
@@ -55,7 +55,6 @@
       position: relative;
       padding: 24px 0;
       background: #FFFFFF;
-      box-shadow: inset 0 -1px 0 0 #E8E8E8;
 
       .label {
         margin-bottom: 16px;

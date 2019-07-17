@@ -1,5 +1,5 @@
 <template>
-  <div class="mo-content" :style="style">
+  <div class="mo-content">
     <slot></slot>
   </div>
 </template>
@@ -7,14 +7,6 @@
 <script>
   export default {
     name: 'moContent',
-    props: {
-      style: {
-        type: Object,
-        default: function() {
-          return {};
-        }
-      },
-    },
     data() {
       return {
 
@@ -30,8 +22,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0 25px;
     overflow: auto;
+    background: #f5f5f5;
 
     &.white {
       background: #fff;

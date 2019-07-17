@@ -1,13 +1,13 @@
 <template>
   <div class="wrap">
-    <mo-content class="white">
-      <div class="inp-box">
+    <mo-content class="white" :style="{padding:'0 20px'}">
+      <div class="inp-box border-b">
         <div class="label">设置登录密码</div>
         <div class="inp">
           <input type="password" v-model="dataForm.password" class="input" placeholder="请输入密码">
         </div>
       </div>
-      <div class="inp-box">
+      <div class="inp-box border-b">
         <div class="label">确认登录密码</div>
         <div class="inp">
           <input type="password" v-model="dataForm.rePassword" class="input" placeholder="请再次输入密码">
@@ -52,7 +52,6 @@
       position: relative;
       padding: 24px 0;
       background: #FFFFFF;
-      box-shadow: inset 0 -1px 0 0 #E8E8E8;
 
       .label {
         margin-bottom: 16px;

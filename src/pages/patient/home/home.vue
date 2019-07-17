@@ -9,22 +9,22 @@
     <ll-box>
       <div class="rect-box">
         <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/people.png" alt="">
           <div class="title">疼痛咨询</div>
           <div class="msg c-gray">专家在线解答</div>
         </div>
         <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/people.png" alt="">
           <div class="title">每日评估</div>
           <div class="msg c-gray">疼痛状况记录</div>
         </div>
         <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/people.png" alt="">
           <div class="title">健康档案</div>
           <div class="msg c-gray">基本病史管理</div>
         </div>
         <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/people.png" alt="">
           <div class="title">我的报告</div>
           <div class="msg c-gray">检查报告管理</div>
         </div>
@@ -33,7 +33,7 @@
     <ll-box title="专家团队">
       <ll-drag>
         <div class="doctor" v-for="(doc,index) in doctors" :key="index">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/doctor.png" alt="">
           <div class="title">{{doc.name}}</div>
           <div class="msg c-gray">{{doc.hospital}}</div>
         </div>
@@ -51,27 +51,27 @@
       </div>
     </ll-box>
     <ll-box title="疼痛治疗科普" :style="{'padding-bottom':0}">
-      <div class="img-text">
+      <div class="img-text border-b">
         <div class="img">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/hand.png" alt="">
         </div>
         <div class="text">
           <div class="title ellipsis">标题文字长度限制一行</div>
           <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
         </div>
       </div>
-      <div class="img-text">
+      <div class="img-text border-b">
         <div class="img">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/hand.png" alt="">
         </div>
         <div class="text">
           <div class="title ellipsis">标题文字长度限制一行</div>
           <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
         </div>
       </div>
-      <div class="img-text">
+      <div class="img-text border-b">
         <div class="img">
-          <img src="@/assets/img/timg.gif" alt="">
+          <img src="@/assets/img/hand.png" alt="">
         </div>
         <div class="text">
           <div class="title ellipsis">标题文字长度限制一行</div>
@@ -83,12 +83,10 @@
 </template>
 
 <script>
-  import llBox from '@/components/llBox'
   import llDrag from '@/components/llDrag'
 
   export default {
     components: {
-      llBox,
       llDrag
     },
     data() {
@@ -116,6 +114,9 @@
           hospital: '湘雅附二医院'
         }]
       }
+    },
+    activated() {
+      this.$emit('setIndex', 0);
     },
     created() {
 
@@ -165,6 +166,7 @@
         width: 68px;
         height: 90px;
         vertical-align: top;
+        border-radius: 6px;
       }
 
       .title {
@@ -213,7 +215,6 @@
 
     .img-text {
       padding: 14px 0;
-      box-shadow: 0 1px 0 0 #E8E8E8;
 
       &:last-child {
         box-shadow: none;
@@ -226,6 +227,10 @@
         margin-right: 16px;
         overflow: hidden;
         border-radius: 6px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .text {

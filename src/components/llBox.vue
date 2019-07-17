@@ -10,6 +10,7 @@
 
 <script>
   export default {
+    name: 'llBox',
     props: {
       title: {
         type: String,

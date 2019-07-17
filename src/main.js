@@ -2,7 +2,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import sdk from './sdk'
-import moContent from '@/components/moContent.vue'
+import moContent from '@/components/moContent'
+import llBox from '@/components/llBox'
 import Vant from 'vant'
 import utils from './utils'
 import http from './utils/http'
@@ -19,6 +20,7 @@ Vue.use(VueLazyload)
 Vue.use(Mui);
 Vue.use(Vant);
 Vue.component(moContent.name, moContent);
+Vue.component(llBox.name, llBox);
 Vue.config.productionTip = false;
 Vue.prototype.$http = http;
 Vue.prototype.$utils = utils;
