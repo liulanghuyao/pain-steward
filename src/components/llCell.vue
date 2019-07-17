@@ -1,10 +1,10 @@
 <template>
-  <div class="cell-box">
-    <div class="cell">
-      <div class="title">
+  <div class="ll-cell">
+    <div class="ll-cell-box">
+      <div class="ll-cell-title">
         <slot name="title">{{title}}</slot>
       </div>
-      <div class="value">
+      <div class="ll-cell-value">
         <slot name="value"></slot>
       </div>
     </div>
@@ -34,27 +34,27 @@
 </script>
 
 <style scoped lang="scss">
-  .cell-box {
+  .ll-cell {
     padding: 0 16px;
     background: #fff;
 
-    .cell {
+    .ll-cell-box {
       display: flex;
       box-shadow: inset 0 -1px 0 0 #E8E8E8;
 
-      .title,
-      .value {
+      .ll-cell-title,
+      .ll-cell-value {
         height: 24px;
         padding: 16px 0;
         line-height: 24px;
         font-size: 15px;
       }
 
-      .title {
+      .ll-cell-title {
         margin-right: 15px;
       }
 
-      .value {
+      .ll-cell-value {
         flex: 1;
 
         input {
@@ -64,6 +64,5 @@
         }
       }
     }
-
   }
 </style>

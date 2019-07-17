@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <van-swipe :autoplay="3000" indicator-color="white" :height="128">
+    <van-swipe :autoplay="3000" indicator-color="#1BD286" :height="128">
       <van-swipe-item>1</van-swipe-item>
       <van-swipe-item>2</van-swipe-item>
       <van-swipe-item>3</van-swipe-item>
@@ -30,37 +30,52 @@
         </div>
       </div>
     </ll-box>
+    <ll-box title="专家团队">
+      <ll-drag>
+        <div class="doctor" v-for="(doc,index) in doctors" :key="index">
+          <img src="@/assets/img/timg.gif" alt="">
+          <div class="title">{{doc.name}}</div>
+          <div class="msg c-gray">{{doc.hospital}}</div>
+        </div>
+      </ll-drag>
+    </ll-box>
     <ll-box>
-      <div class="rect-box long">
-        <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">疼痛咨询</div>
-          <div class="msg c-gray">专家在线解答</div>
+      <div class="adver">
+        <div class="adver-msg">
+          <div class="title">微创镇痛技术</div>
+          <div class="msg">难治性疼痛的最新手术方案</div>
         </div>
-        <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">每日评估</div>
-          <div class="msg c-gray">疼痛状况记录</div>
+        <div class="btn-box">
+          <span class="span-btn">去了解</span>
         </div>
-        <div class="rect">
+      </div>
+    </ll-box>
+    <ll-box title="疼痛治疗科普" :style="{'padding-bottom':0}">
+      <div class="img-text">
+        <div class="img">
           <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">健康档案</div>
-          <div class="msg c-gray">基本病史管理</div>
         </div>
-        <div class="rect">
-          <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">我的报告</div>
-          <div class="msg c-gray">检查报告管理</div>
+        <div class="text">
+          <div class="title ellipsis">标题文字长度限制一行</div>
+          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
         </div>
-        <div class="rect">
+      </div>
+      <div class="img-text">
+        <div class="img">
           <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">我的报告</div>
-          <div class="msg c-gray">检查报告管理</div>
         </div>
-        <div class="rect">
+        <div class="text">
+          <div class="title ellipsis">标题文字长度限制一行</div>
+          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
+        </div>
+      </div>
+      <div class="img-text">
+        <div class="img">
           <img src="@/assets/img/timg.gif" alt="">
-          <div class="title">我的报告</div>
-          <div class="msg c-gray">检查报告管理</div>
+        </div>
+        <div class="text">
+          <div class="title ellipsis">标题文字长度限制一行</div>
+          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
         </div>
       </div>
     </ll-box>
@@ -69,14 +84,37 @@
 
 <script>
   import llBox from '@/components/llBox'
+  import llDrag from '@/components/llDrag'
 
   export default {
     components: {
-      llBox
+      llBox,
+      llDrag
     },
     data() {
       return {
-
+        doctors: [{
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }, {
+          name: '张三丰',
+          hospital: '湘雅附二医院'
+        }]
       }
     },
     created() {
@@ -116,11 +154,89 @@
           font-size: 11px;
         }
       }
+    }
 
-      &.long {
-        img {
-          width: 68px;
-          height: 90px;
+    .doctor {
+      width: 68px;
+      margin-right: 16px;
+      text-align: center;
+
+      img {
+        width: 68px;
+        height: 90px;
+        vertical-align: top;
+      }
+
+      .title {
+        margin: 6px 0 2px;
+        font-size: 13px;
+      }
+
+      .msg {
+        font-size: 11px;
+      }
+    }
+
+    .adver {
+      display: flex;
+
+      .adver-msg {
+        flex: 1;
+
+        .title {
+          margin-bottom: 6px;
+          font-size: 17px;
+          color: #0CD5A9;
+        }
+
+        .msg {
+          font-size: 13px;
+          color: #98A0A0;
+        }
+      }
+
+      .btn-box {
+        display: flex;
+        align-items: center;
+
+        .span-btn {
+          display: inline-block;
+          padding: 2px 11px;
+          background: #0CD5A9;
+          color: #fff;
+          font-size: 13px;
+          border-radius: 12px;
+          border-radius: 12px;
+        }
+      }
+    }
+
+    .img-text {
+      padding: 14px 0;
+      box-shadow: 0 1px 0 0 #E8E8E8;
+
+      &:last-child {
+        box-shadow: none;
+      }
+
+      .img {
+        float: left;
+        width: 88px;
+        height: 68px;
+        margin-right: 16px;
+        overflow: hidden;
+        border-radius: 6px;
+      }
+
+      .text {
+        .title {
+          margin-bottom: 6px;
+          font-size: 16px;
+        }
+
+        .msg {
+          font-size: 13px;
+          letter-spacing: 1px;
         }
       }
     }
