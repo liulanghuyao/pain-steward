@@ -9,7 +9,7 @@
         <div class="head"></div>
         <div class="box clearfix">
           <span class="text" v-if="item.type==1">{{item.text}}</span>
-          <img class="img" :src="require('@/assets/img/doctor.png')" v-if="item.type==2" @click="openImg()">
+          <img class="img" :src="item.img" v-if="item.type==2" @click="openImg(item.imgIndex)">
         </div>
       </div>
       <div id="bottom"></div>
@@ -37,30 +37,13 @@
     data() {
       return {
         text: '',
-        msgs: [{
-          type: 1,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: '@/assets/img/doctor.png'
-        }, {
-          type: 1,
-          who: 2,
-          text: '我最近的血糖值异常',
-          img: '@/assets/img/doctor.png'
-        }, {
-          type: 1,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: '@/assets/img/doctor.png'
-        }, {
-          type: 2,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: '@/assets/img/doctor.png'
-        }]
+        imgs: [],
+        msgs: []
       }
     },
     created() {
+      this.getOldMsg();
+      this.getNewMsg();
       this.goToBottom();
     },
     methods: {
@@ -70,25 +53,84 @@
           who: 1,
           text: this.text,
         });
+        this.text = '';
         this.goToBottom();
       },
-      openImg() {
-        ImagePreview([
-          require('@/assets/img/doctor.png'),
-          require('@/assets/img/doctor.png')
-        ]);
+      openImg(index) {
+        ImagePreview({
+          images: this.imgs,
+          startPosition: index,
+          onClose() {
+            // do something
+          }
+        });
       },
       goToBottom() {
         this.$nextTick(() => {
           document.getElementById('bottom').scrollIntoView();
         })
+      },
+      getOldMsg() {
+        this.msgs = [{
+          type: 1,
+          who: 1,
+          text: '我最近的血糖值异常',
+          img: require('@/assets/img/doctor.png')
+        }, {
+          type: 1,
+          who: 2,
+          text: '我最近的血糖值异常',
+          img: require('@/assets/img/doctor.png')
+        }, {
+          type: 1,
+          who: 1,
+          text: '我最近的血糖值异常',
+          img: require('@/assets/img/doctor.png')
+        }, {
+          type: 2,
+          who: 1,
+          text: '我最近的血糖值异常',
+          img: require('@/assets/img/doctor.png')
+        }, {
+          type: 2,
+          who: 1,
+          text: '我最近的血糖值异常',
+          img: require('@/assets/img/doctor.png')
+        }]
+      },
+      getNewMsg() {
+        this.interval = setInterval(() => {
+          this.msgs.push({
+            type: 2,
+            who: 1,
+            text: '我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常',
+            img: require('@/assets/img/doctor.png')
+          });
+          this.goToBottom();
+        }, 10000)
       }
     },
     computed: {
       showBtn() {
         return this.$utils.isEmpty(this.text);
+      },
+    },
+    beforeDestroy() {
+      clearInterval(this.interval);
+    },
+    watch: {
+      msgs(newValue, oldValue) {
+        this.imgs = [];
+        let imgIndex = 0;
+        this.msgs.forEach((e, i) => {
+          if (e.type == 2) {
+            e.imgIndex = imgIndex;
+            this.imgs.push(e.img);
+            imgIndex++;
+          }
+        })
       }
-    }
+    },
   }
 </script>
 
