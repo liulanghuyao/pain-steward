@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <mo-content>
-      <ll-box :style="{padding:'0 16px'}">
+      <ll-box class="ll-box">
         <ll-cell title="姓名">
           <input type="text" slot="value" placeholder="请输入姓名">
         </ll-cell>
@@ -61,6 +61,10 @@
 
 <style scoped lang="scss">
   .wrap {
+
+    .ll-box {
+      padding: 0 16px;
+    }
 
     .bottom {
       padding: 9px 16px;

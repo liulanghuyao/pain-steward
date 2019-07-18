@@ -1,19 +1,20 @@
 <template>
   <div class="wrap">
-    <mo-content :style="{padding:'0 16px'}">
-      <ll-order></ll-order>
-      <ll-order></ll-order>
-      <ll-order></ll-order>
+    <mo-content class="mo-content">
+      <order-card></order-card>
+      <order-card></order-card>
+      <order-card></order-card>
+      <order-card></order-card>
     </mo-content>
   </div>
 </template>
 
 <script>
-  import llOrder from '@/components/llOrder'
-  
+  import orderCard from '@/components/order/orderCard'
+
   export default {
-    components:{
-      llOrder
+    components: {
+      orderCard
     },
     data() {
       return {
@@ -30,5 +31,9 @@
 </script>
 
 <style scoped lang="scss">
-  .wrap {}
+  .wrap {
+    .mo-content {
+      padding: 0 16px;
+    }
+  }
 </style>

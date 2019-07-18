@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <mo-content class="white" :style="{padding:'0 20px'}">
+    <mo-content class="white mo-content">
       <div class="inp-box border-b">
         <div class="label">账号</div>
         <div class="inp">
@@ -51,6 +51,10 @@
 
 <style scoped lang="scss">
   .wrap {
+    .mo-content {
+      padding: 0 20px;
+    }
+
     .inp-box {
       position: relative;
       padding: 24px 0;

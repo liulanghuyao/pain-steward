@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <mo-content>
-      <ll-box :style="{padding:'0 16px'}">
+      <ll-box class="ll-box">
         <ll-cell title="姓名" value="张三丰"></ll-cell>
         <ll-cell title="性别" value="女">
         </ll-cell>
@@ -17,7 +17,7 @@
         </ll-cell>
       </ll-box>
       <div class="bottom">
-        <ll-tip msg="注：此信息仅您和医生可见。为了给您带来更准确的医疗服务，请您务必填写真实资料。一旦信息建立，将无法编辑和删除，请确认无误后提交。"></ll-tip>
+        <ll-tip circle msg="注：此信息仅您和医生可见。为了给您带来更准确的医疗服务，请您务必填写真实资料。一旦信息建立，将无法编辑和删除，请确认无误后提交。"></ll-tip>
         <van-button type="primary" class="btn btn-block" @click="save()" :disabled="btnDisabled">保存</van-button>
       </div>
     </mo-content>
@@ -53,6 +53,10 @@
 
 <style scoped lang="scss">
   .wrap {
+
+    .ll-box {
+      padding: 0 16px;
+    }
 
     .bottom {
       padding: 9px 16px;

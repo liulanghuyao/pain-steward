@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <van-swipe :autoplay="3000" indicator-color="#1BD286" :height="128">
+    <van-swipe :autoplay="3000" indicator-color="#1BD286">
       <van-swipe-item>1</van-swipe-item>
       <van-swipe-item>2</van-swipe-item>
       <van-swipe-item>3</van-swipe-item>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </ll-box>
-    <ll-box title="专家团队">
+    <ll-box title="专家团队" moreLink="/patient/doctor/doctorList">
       <ll-drag>
         <div class="doctor" v-for="(doc,index) in doctors" :key="index">
           <img src="@/assets/img/doctor.png" alt="">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </ll-box>
-    <ll-box title="疼痛治疗科普" :style="{'padding-bottom':0}">
+    <ll-box title="疼痛治疗科普" moreLink="/patient/doctor/doctorList" :style="{'padding-bottom':0}">
       <div class="img-text border-b">
         <div class="img">
           <img src="@/assets/img/hand.png" alt="">
@@ -214,7 +214,7 @@
     }
 
     .img-text {
-      padding: 14px 0;
+      padding: 12px 0;
 
       &:last-child {
         box-shadow: none;
@@ -227,6 +227,7 @@
         margin-right: 16px;
         overflow: hidden;
         border-radius: 6px;
+
         img {
           width: 100%;
           height: 100%;
@@ -240,8 +241,10 @@
         }
 
         .msg {
+          height: 40px;
           font-size: 13px;
           letter-spacing: 1px;
+          line-height: 20px;
         }
       }
     }

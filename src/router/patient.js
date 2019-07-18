@@ -1,12 +1,48 @@
 import index from '@/pages/patient/index'
 import home from '@/pages/patient/home/home'
 import consultList from '@/pages/patient/consult/consultList'
+import buyConsult from '@/pages/patient/consult/buyConsult'
+import payConsult from '@/pages/patient/consult/payConsult'
 import personal from '@/pages/patient/personal/index'
 import personalMessage from '@/pages/patient/personal/personalMessage'
 import mineOrderList from '@/pages/patient/order/mineOrderList'
 import imageTextConsult from '@/pages/patient/consult/imageTextConsult'
+import doctorList from '@/pages/patient/doctor/doctorList';
+import doctorDetail from '@/pages/patient/doctor/doctorDetail';
 
 export default [{
+  path: '/patient/consult/payConsult',
+  name: 'payConsult',
+  component: payConsult,
+  meta: {
+    title: '确认支付',
+    rank: 3
+  }
+}, {
+  path: '/patient/consult/buyConsult',
+  name: 'buyConsult',
+  component: buyConsult,
+  meta: {
+    title: '购买咨询',
+    rank: 3
+  }
+}, {
+  path: '/patient/doctor/doctorDetail',
+  name: 'doctorDetail',
+  component: doctorDetail,
+  meta: {
+    title: '医生主页',
+    rank: 2
+  }
+}, {
+  path: '/patient/doctor/doctorList',
+  name: 'doctorList',
+  component: doctorList,
+  meta: {
+    title: '专家团队',
+    rank: 1
+  }
+}, {
   path: '/patient/consult/imageText',
   name: 'imageTextConsult',
   component: imageTextConsult,

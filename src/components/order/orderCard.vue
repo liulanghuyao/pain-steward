@@ -1,18 +1,18 @@
 <template>
-  <div class="ll-order">
-    <div class="ll-order-header c-gray border-b clearfix">
-      <span class="fl ll-order-time">2019-06-19 12:23:05</span>
-      <span class="fr ll-order-status">图文咨询</span>
+  <div class="order-card">
+    <div class="order-card-header c-gray border-b clearfix">
+      <span class="fl order-card-time">2019-06-19 12:23:05</span>
+      <span class="fr order-card-status">图文咨询</span>
     </div>
-    <div class="ll-order-center">
+    <div class="order-card-center">
       <img src="@/assets/img/doctor.png" alt="">
-      <div class="ll-order-detail">
-        <div class="ll-order-name">唐易迅</div>
-        <div class="ll-order-duty c-gray">主任医生</div>
-        <div class="ll-order-hospital c-gray">中南大学湘雅二医院 疼痛专科</div>
+      <div class="order-card-detail">
+        <div class="order-card-name">唐易迅</div>
+        <div class="order-card-duty c-gray">主任医生</div>
+        <div class="order-card-hospital c-gray">中南大学湘雅二医院 疼痛专科</div>
       </div>
     </div>
-    <div class="ll-order-footer border-t clearfix">
+    <div class="order-card-footer border-t clearfix">
       <span class="fl c-green">缴费成功</span>
       <span class="fr c-orange">￥50</span>
     </div>
@@ -36,26 +36,26 @@
 </script>
 
 <style scoped lang="scss">
-  .ll-order {
+  .order-card {
     margin: 8px 0;
     padding: 0 16px;
     background: #fff;
     border-radius: 6px;
 
-    .ll-order-header {
+    .order-card-header {
       padding: 14px 0;
       line-height: 22px;
 
-      .ll-order-time {
+      .order-card-time {
         font-size: 13px;
       }
 
-      .ll-order-status {
+      .order-card-status {
         font-size: 15px;
       }
     }
 
-    .ll-order-center {
+    .order-card-center {
       padding: 16px 0;
 
       img {
@@ -67,20 +67,20 @@
         border-radius: 6px;
       }
 
-      .ll-order-detail {
+      .order-card-detail {
         font-size: 15px;
 
-        .ll-order-name {
+        .order-card-name {
           font-size: 16px;
         }
 
-        .ll-order-duty {
+        .order-card-duty {
           margin: 7px 0;
         }
       }
     }
 
-    .ll-order-footer {
+    .order-card-footer {
       padding: 11px 0;
       line-height: 22px;
 

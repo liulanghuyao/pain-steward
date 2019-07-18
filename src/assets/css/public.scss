@@ -33,6 +33,22 @@ body {
   color: #FD983A;
 }
 
+.bg-green {
+  background-color: #0CD5A9;
+}
+
+.bg-blue {
+  background-color: #83ADF9;
+}
+
+.bg-orange {
+  background-color: #FD983A;
+}
+
+.padding-0 {
+  padding: 0 !important;
+}
+
 .fl {
   float: left;
 }
@@ -72,33 +88,40 @@ body {
 .btn {
   border-radius: 6px !important;
   
-  &.btn-block {
-    display: block;
-    width: 100%;
-    height: 48px;
-    line-height: 48px;
-    font-size: 17px;
-    letter-spacing: 1.55px;
+  &.van-button{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 9px;
+    
+    &.btn-block {
+      display: block;
+      width: 100%;
+      height: 48px;
+      line-height: 48px;
+      font-size: 17px;
+      letter-spacing: 1.55px;
+    }
+    
+    &.van-button--plain {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 5px 
+    }
+    
+    &.van-button--primary {
+        background-color: #0CD5A9;
+        border: 1px solid #0CD5A9;
+    }
+    
+    &.van-button--plain.van-button--primary {
+      color: #0CD5A9;
+    }
+    
+    &.van-button--plain {
+      background-color: #fff;
+    }
   }
   
-  &.van-button--plain {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 5px 
-  }
-  
-  &.van-button--primary {
-      background-color: #0CD5A9;
-      border: 1px solid #0CD5A9;
-  }
-  
-  &.van-button--plain.van-button--primary {
-    color: #0CD5A9;
-  }
-  
-  &.van-button--plain {
-    background-color: #fff;
-  }
 }
 
 .border-b {
@@ -120,4 +143,31 @@ body {
 
 .van-tabs--line .van-tabs__wrap {
   height: 56px !important;
+}
+
+.van-search {
+  padding: 8px 16px !important;
+}
+
+.van-search__content {
+  background-color: #fff !important;
+  border-radius: 6px !important;
+}
+
+.van-field__control {
+  font-size: 15px;
+}
+
+.upload {
+  .van-uploader__upload {
+    width: 75px;
+    height: 75px;
+    background-color: #EDF9F7;
+    border-color: #EDF9F7;
+  }
+  
+  .van-uploader__preview-image {
+    width: 75px;
+    height: 75px;
+  }
 }

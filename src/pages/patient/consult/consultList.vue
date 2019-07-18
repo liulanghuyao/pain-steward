@@ -4,13 +4,14 @@
       <van-tabs v-model="active" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A" color="#0CD5A9">
         <van-tab title="图文咨询">
           <div class="content">
-            <ll-order @click.native="$router.push('/patient/consult/imageText')"></ll-order>
+            <order-card @click.native="$router.push('/patient/consult/imageText')"></order-card>
           </div>
         </van-tab>
         <van-tab title="电话咨询">
           <div class="content">
-            <ll-order></ll-order>
-            <ll-order></ll-order>
+            <order-card></order-card>
+            <order-card></order-card>
+            <order-card></order-card>
           </div>
         </van-tab>
       </van-tabs>
@@ -19,11 +20,11 @@
 </template>
 
 <script>
-  import llOrder from '@/components/llOrder'
+  import orderCard from '@/components/order/orderCard'
 
   export default {
     components: {
-      llOrder
+      orderCard
     },
     data() {
       return {

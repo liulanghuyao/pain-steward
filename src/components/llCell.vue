@@ -1,10 +1,10 @@
 <template>
   <div class="ll-cell">
     <div class="ll-cell-box border-b">
-      <div class="ll-cell-title">
+      <div class="ll-cell-title" :class="setClass(titleClass)">
         <slot name="title">{{title}}</slot>
       </div>
-      <div class="ll-cell-value ellipsis">
+      <div class="ll-cell-value ellipsis" :class="setClass(valueClass)">
         <slot name="value">{{value}}</slot>
       </div>
       <div class="ll-cell-icon c-gray" v-if="icon != null">
@@ -29,6 +29,14 @@
       value: {
         type: String,
         default: ''
+      },
+      titleClass: {
+        type: String,
+        default: ''
+      },
+      valueClass: {
+        type: String,
+        default: ''
       }
     },
     data() {
@@ -39,6 +47,16 @@
     created() {},
     methods: {
 
+    },
+    computed: {
+      setClass(cls) {
+        return function(cls) {
+          let obj = {
+            [cls]: true
+          };
+          return obj;
+        }
+      }
     }
   }
 </script>
@@ -65,7 +83,6 @@
       .ll-cell-value {
         height: 24px;
         line-height: 24px;
-        font-size: 15px;
       }
 
       .ll-cell-title {
