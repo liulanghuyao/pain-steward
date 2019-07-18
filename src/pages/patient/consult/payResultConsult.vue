@@ -1,0 +1,53 @@
+<template>
+  <div class="wrap">
+    <mo-content>
+      <result-tip></result-tip>
+      <consult-detail></consult-detail>
+      <ll-box title="缴费详情" :style="{'padding-bottom':0}">
+        <ll-cell title="支付金额" titleClass="c-gray" valueClass="c-orange" value="50元"></ll-cell>
+        <ll-cell title="平台单号" titleClass="c-gray" value="2343413414114114"></ll-cell>
+        <ll-cell title="微信单号" titleClass="c-gray" value="234183084109840184091840918"></ll-cell>
+        <ll-cell title="支付状态" titleClass="c-gray" valueClass="c-green" value="已支付"></ll-cell>
+        <ll-cell title="支付时间" titleClass="c-gray" value="2018-23-12 12:33"></ll-cell>
+      </ll-box>
+      <div class="btn-box">
+        <van-button type="primary" class="btn btn-block" @click="start()">发起咨询</van-button>
+      </div>
+    </mo-content>
+  </div>
+</template>
+
+<script>
+  import resultTip from '@/components/consult/resultTip'
+  import consultDetail from '@/components/consult/consultDetail'
+  import llCell from '@/components/llCell.vue'
+
+  export default {
+    components: {
+      resultTip,
+      llCell,
+      consultDetail
+    },
+    data() {
+      return {}
+    },
+    created() {
+
+    },
+    methods: {
+      start() {
+        this.$router.push({
+          path: '/patient/consult/imageText'
+        })
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+  .wrap {
+    .btn-box {
+      margin: 48px 16px 28px;
+    }
+  }
+</style>

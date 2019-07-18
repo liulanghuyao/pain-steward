@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
     <mo-content>
+      <van-notice-bar text="请在13分20秒内完成支付" left-icon="volume-o" />
       <consult-detail></consult-detail>
       <ll-cell title="支付金额" class="pd-lr" valueClass="c-orange money" value="50元"></ll-cell>
       <div class="btn-box">
@@ -29,13 +30,13 @@
     },
     methods: {
       pay() {
-
+        this.$router.push({path:'/patient/consult/payResultConsult'})
       }
     }
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .wrap {
     .money {
       font-size: 18px !important;

@@ -18,7 +18,7 @@
           <div class="title">每日评估</div>
           <div class="msg c-gray">疼痛状况记录</div>
         </div>
-        <div class="rect">
+        <div class="rect" @click="$router.push('/patient/archives/healthy')">
           <img src="@/assets/img/people.png" alt="">
           <div class="title">健康档案</div>
           <div class="msg c-gray">基本病史管理</div>
@@ -32,7 +32,7 @@
     </ll-box>
     <ll-box title="专家团队" moreLink="/patient/doctor/doctorList">
       <ll-drag>
-        <div class="doctor" v-for="(doc,index) in doctors" :key="index">
+        <div class="doctor" v-for="(doc,index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail'})">
           <img src="@/assets/img/doctor.png" alt="">
           <div class="title">{{doc.name}}</div>
           <div class="msg c-gray">{{doc.hospital}}</div>
@@ -45,7 +45,7 @@
           <div class="title">微创镇痛技术</div>
           <div class="msg">难治性疼痛的最新手术方案</div>
         </div>
-        <div class="btn-box">
+        <div class="span-btn-box">
           <span class="span-btn">去了解</span>
         </div>
       </div>
@@ -197,7 +197,7 @@
         }
       }
 
-      .btn-box {
+      .span-btn-box {
         display: flex;
         align-items: center;
 

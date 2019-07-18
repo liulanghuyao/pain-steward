@@ -10,6 +10,7 @@
       <div class="c-gray">请您详细提交需解决的关键问题，简要提供相关病史资料及主要检查结果，以便医生更加准确分析您的病情。</div>
     </ll-box>
     <ll-box title="病情图片">
+      <ll-img-show :list="imgs"></ll-img-show>
     </ll-box>
     <ll-box title="联系电话">
       <div class="c-orange">15874940105</div>
@@ -18,15 +19,22 @@
 </template>
 
 <script>
-  import llCell from '@/components/llCell.vue'
+  import llCell from '@/components/llCell'
+  import llImgShow from '@/components/llImgShow'
 
   export default {
     components: {
       llCell,
+      llImgShow
     },
     data() {
       return {
-
+        imgs: [
+          require('@/assets/img/doctor.png'),
+          require('@/assets/img/doctor.png'),
+          require('@/assets/img/doctor.png'),
+          require('@/assets/img/doctor.png'),
+        ]
       }
     },
     created() {

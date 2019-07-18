@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <mo-content>
-      <ll-box class="ll-box">
+      <ll-box>
         <ll-cell title="姓名">
           <input type="text" slot="value" placeholder="请输入姓名">
         </ll-cell>
