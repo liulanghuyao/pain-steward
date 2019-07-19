@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
     <mo-content>
+      <van-notice-bar text="以下健康信息如有变化，请随时编辑更新。" left-icon="volume-o" />
       <ll-box class="details">
         <ll-cell title="肿瘤诊断是否明确" icon="down">
           <input type="text" slot="value" placeholder="请选择" readonly="readonly">

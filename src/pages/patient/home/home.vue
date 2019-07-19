@@ -7,13 +7,13 @@
       <van-swipe-item>4</van-swipe-item>
     </van-swipe>
     <ll-box>
-      <div class="rect-box">
+      <div class="rect-box" @click="$router.replace('/patient/consult/list');">
         <div class="rect">
           <img src="@/assets/img/people.png" alt="">
           <div class="title">疼痛咨询</div>
           <div class="msg c-gray">专家在线解答</div>
         </div>
-        <div class="rect">
+        <div class="rect" @click="$router.push('/patient/evaluate/everyday')">
           <img src="@/assets/img/people.png" alt="">
           <div class="title">每日评估</div>
           <div class="msg c-gray">疼痛状况记录</div>

@@ -11,8 +11,17 @@ import imageTextConsult from '@/pages/patient/consult/imageTextConsult'
 import doctorList from '@/pages/patient/doctor/doctorList';
 import doctorDetail from '@/pages/patient/doctor/doctorDetail';
 import healthy from '@/pages/patient/archives/healthy';
+import everyday from '@/pages/patient/evaluate/everyday';
 
 export default [{
+  path: '/patient/evaluate/everyday',
+  name: 'everyday',
+  component: everyday,
+  meta: {
+    title: '每日评估',
+    rank: 1
+  }
+}, {
   path: '/patient/archives/healthy',
   name: 'healthy',
   component: healthy,
