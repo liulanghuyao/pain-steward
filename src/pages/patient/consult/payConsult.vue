@@ -12,14 +12,12 @@
 </template>
 
 <script>
-  import llTip from '@/components/llTip.vue'
+  import llTip from '@/components/llTip'
   import consultDetail from '@/components/consult/consultDetail'
-  import llCell from '@/components/llCell.vue'
 
   export default {
     components: {
       llTip,
-      llCell,
       consultDetail
     },
     data() {

@@ -1,21 +1,19 @@
 <template>
   <div class="wrap">
-    <mo-content>
-      <van-tabs v-model="active" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A" color="#0CD5A9">
-        <van-tab title="图文咨询">
-          <div class="content">
-            <order-card @click.native="$router.push('/patient/consult/imageText')"></order-card>
-          </div>
-        </van-tab>
-        <van-tab title="电话咨询">
-          <div class="content">
-            <order-card></order-card>
-            <order-card></order-card>
-            <order-card></order-card>
-          </div>
-        </van-tab>
-      </van-tabs>
-    </mo-content>
+    <van-tabs v-model="active" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A" color="#0CD5A9">
+      <van-tab title="图文咨询">
+        <div class="content">
+          <order-card @click.native="$router.push('/patient/consult/imageText')"></order-card>
+        </div>
+      </van-tab>
+      <van-tab title="电话咨询">
+        <div class="content">
+          <order-card></order-card>
+          <order-card></order-card>
+          <order-card></order-card>
+        </div>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 

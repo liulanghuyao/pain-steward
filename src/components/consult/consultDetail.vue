@@ -19,12 +19,10 @@
 </template>
 
 <script>
-  import llCell from '@/components/llCell'
   import llImgShow from '@/components/llImgShow'
 
   export default {
     components: {
-      llCell,
       llImgShow
     },
     data() {

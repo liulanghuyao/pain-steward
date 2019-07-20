@@ -4,7 +4,7 @@ import router from './router'
 import sdk from './sdk'
 import moContent from '@/components/moContent'
 import llBox from '@/components/llBox'
-import llTextBox from '@/components/llTextBox'
+import llCell from '@/components/llCell'
 import Vant from 'vant'
 import utils from './utils'
 import http from './utils/http'
@@ -22,7 +22,7 @@ Vue.use(Mui);
 Vue.use(Vant);
 Vue.component(moContent.name, moContent);
 Vue.component(llBox.name, llBox);
-Vue.component(llTextBox.name, llTextBox);
+Vue.component(llCell.name, llCell);
 Vue.config.productionTip = false;
 Vue.prototype.$http = http;
 Vue.prototype.$utils = utils;

@@ -62,10 +62,12 @@
 
 <script>
   import doctorHeader from '@/components/doctor/doctorHeader'
+  import llTextBox from '@/components/llTextBox'
 
   export default {
     components: {
-      doctorHeader
+      doctorHeader,
+      llTextBox
     },
     data() {
       return {

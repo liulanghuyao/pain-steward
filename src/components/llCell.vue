@@ -87,6 +87,12 @@
 
       .ll-cell-title {
         margin-right: 15px;
+
+        input {
+          width: 100%;
+          border: 0;
+          text-align: left;
+        }
       }
 
       .ll-cell-value {

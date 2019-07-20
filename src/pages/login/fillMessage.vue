@@ -33,12 +33,10 @@
 </template>
 
 <script>
-  import llCell from '@/components/llCell.vue'
-  import llTip from '@/components/llTip.vue'
+  import llTip from '@/components/llTip'
 
   export default {
     components: {
-      llCell,
       llTip
     },
     data() {

@@ -7,8 +7,8 @@
       <van-swipe-item>4</van-swipe-item>
     </van-swipe>
     <ll-box>
-      <div class="rect-box" @click="$router.replace('/patient/consult/list');">
-        <div class="rect">
+      <div class="rect-box">
+        <div class="rect" @click="$router.push('/patient/doctor/doctorList');">
           <img src="@/assets/img/people.png" alt="">
           <div class="title">疼痛咨询</div>
           <div class="msg c-gray">专家在线解答</div>
@@ -23,7 +23,7 @@
           <div class="title">健康档案</div>
           <div class="msg c-gray">基本病史管理</div>
         </div>
-        <div class="rect">
+        <div class="rect" @click="$router.push('/patient/report/mineList')">
           <img src="@/assets/img/people.png" alt="">
           <div class="title">我的报告</div>
           <div class="msg c-gray">检查报告管理</div>
@@ -46,7 +46,7 @@
           <div class="msg">难治性疼痛的最新手术方案</div>
         </div>
         <div class="span-btn-box">
-          <span class="span-btn">去了解</span>
+          <span class="span-btn" @click="$router.push('/patient/analgesia/broadHeading')">去了解</span>
         </div>
       </div>
     </ll-box>

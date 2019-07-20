@@ -1,7 +1,9 @@
 <template>
   <div class="ll-tip">
     <div class="ll-tip-circle" :style="{'background':circleColor}" v-if="circle!=null"></div>
-    <div class="ll-tip-msg c-gray">{{msg}}</div>
+    <div class="ll-tip-msg c-gray">
+      <slot>{{msg}}</slot>
+    </div>
   </div>
 </template>
 
@@ -44,6 +46,7 @@
       float: left;
       width: 17px;
       height: 17px;
+      margin-top: 2px;
       margin-right: 8px;
       border-radius: 50%;
     }

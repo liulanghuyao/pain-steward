@@ -12,8 +12,44 @@ import doctorList from '@/pages/patient/doctor/doctorList';
 import doctorDetail from '@/pages/patient/doctor/doctorDetail';
 import healthy from '@/pages/patient/archives/healthy';
 import everyday from '@/pages/patient/evaluate/everyday';
+import today from '@/pages/patient/evaluate/today';
+import broadHeading from '@/pages/patient/analgesia/broadHeading';
+import explainDetail from '@/pages/patient/analgesia/explainDetail';
+import mineReportList from '@/pages/patient/report/mineReportList';
 
 export default [{
+  path: '/patient/report/mineList',
+  name: 'mineReportList',
+  component: mineReportList,
+  meta: {
+    title: '我的报告',
+    rank: 1
+  }
+}, {
+  path: '/patient/analgesia/explainDetail',
+  name: 'explainDetail',
+  component: explainDetail,
+  meta: {
+    title: '微创镇痛技术',
+    rank: 3
+  }
+}, {
+  path: '/patient/analgesia/broadHeading',
+  name: 'broadHeading',
+  component: broadHeading,
+  meta: {
+    title: '微创镇痛技术',
+    rank: 1
+  }
+}, {
+  path: '/patient/evaluate/today',
+  name: 'today',
+  component: today,
+  meta: {
+    title: '今日评估',
+    rank: 2
+  }
+}, {
   path: '/patient/evaluate/everyday',
   name: 'everyday',
   component: everyday,

@@ -58,6 +58,7 @@
     }
 
     .file-describe {
+      margin-top: 10px;
       font-size: 13px;
       text-align: center;
     }

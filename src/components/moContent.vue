@@ -22,7 +22,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding-bottom: 20px;
+    padding: 0 0 20px;
     overflow: auto;
     background: #f5f5f5;
 

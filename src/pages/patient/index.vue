@@ -2,7 +2,7 @@
   <div class="wrap">
     <mo-content>
       <keep-alive>
-        <router-view class="content" @setIndex="setIndex"></router-view>
+        <router-view class="router-view-content" @setIndex="setIndex"></router-view>
       </keep-alive>
     </mo-content>
     <van-tabbar v-model="active" active-color="#0CD5A9" inactive-color="#98A0A0">
@@ -36,8 +36,8 @@
 
 <style scoped="scoped" lang="scss">
   .wrap {
-    .content {
-      padding-bottom: 58px;
+    .router-view-content {
+      padding-bottom: 50px;
     }
   }
 </style>
