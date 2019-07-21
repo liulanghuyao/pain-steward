@@ -61,10 +61,11 @@
         });
       },
       uploadFile() {
-        console.log(this.fileList);
         this.fileList.forEach((e, i) => {
           this.list.push(e.content);
-        })
+        });
+        this.fileList = [];
+        this.show = false;
       }
     }
   }
