@@ -5,8 +5,8 @@
         <ll-cell title="姓名">
           <input type="text" slot="value" placeholder="请输入姓名">
         </ll-cell>
-        <ll-cell title="性别" icon="down">
-          <input type="text" slot="value" placeholder="请选择" readonly="readonly">
+        <ll-cell title="性别" icon="down" @click.native="showSex=true">
+          <input v-model="dataForm.sex" type="text" slot="value" placeholder="请选择" readonly="readonly">
         </ll-cell>
         <ll-cell title="身份证号码">
           <input type="text" slot="value" placeholder="请输入身份证号码">
@@ -28,6 +28,9 @@
         <ll-tip circle msg="注：此信息仅您和医生可见。为了给您带来更准确的医疗服务，请您务必填写真实资料。一旦信息建立，将无法编辑和删除，请确认无误后提交。"></ll-tip>
         <van-button type="primary" class="btn btn-block" @click="save()" :disabled="btnDisabled">完成注册</van-button>
       </div>
+      <van-popup v-model="showSex" position="bottom">
+        <van-picker show-toolbar :columns="sexColumns" @cancel="showSex = false" @confirm="onConfirmSex" />
+      </van-popup>
     </mo-content>
   </div>
 </template>
@@ -42,16 +45,21 @@
     data() {
       return {
         dataForm: {
-          mobilephone: '18175156251',
-          yzm: '123456',
+          sex: '',
         },
-        btnDisabled: false
+        btnDisabled: false,
+        showSex: false,
+        sexColumns: ['男', '女']
       }
     },
     created() {
 
     },
     methods: {
+      onConfirmSex(value) {
+        this.dataForm.sex = value;
+        this.showSex = false;
+      },
       save() {}
     }
   }

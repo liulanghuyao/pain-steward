@@ -22,21 +22,18 @@ const mutations = {
   }
 };
 const actions = {
-  setLogin(context, item) {
-    context.commit('setLogin', item);
+  login(context, authorization) {
+    context.commit('setLogin', true);
+    authorization && storage.setItem('Authorization', authorization);
+  },
+  logout(context) {
+    context.commit('setLogin', false);
+    storage.removeItem('Authorization');
+    storage.removeItem('user');
   },
   setUser(context, item) {
-    if (storage.getItem('token')) {
-      http.get('app/user/userInfo').then(data => {
-        if (data.code == 1) {
-          context.commit('setUser', storage.getItem('user') || {});
-        } else {
-          storage.setItem('user', data.user);
-          context.commit('setUser', data.user);
-        }
-        context.dispatch('setLogin', true);
-      }).catch(error => {});
-    }
+    storage.setItem('user', item);
+    context.commit('setUser', item);
   }
 };
 export default {

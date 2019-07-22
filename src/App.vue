@@ -49,17 +49,13 @@
         }
       },
       getUser() {
-        if (this.$storage.getItem('token')) {
-          this.$store.dispatch('login/setUser');
-        } else {
-          if (this.$storage.getItem('mobile') && this.$storage.getItem('password')) {
-            this.$http.postJson('app/login', {
-              mobile: this.$storage.getItem('mobile'),
-              password: this.$storage.getItem('password'),
-            }).then(data => {
-              this.$storage.setItem('token', data.token, data.expire * 1000);
-              this.$store.dispatch('login/setUser');
-            }).catch(error => {});
+        if (this.$storage.getItem('Authorization')) {
+          this.$store.dispatch('login/login');
+          let user = this.$storage.getItem('user');
+          if (user) {
+            this.$store.dispatch('login/setUser', user);
+          } else {
+            this.$router.push('/fill-message');
           }
         }
       }

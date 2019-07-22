@@ -27,9 +27,9 @@
     data() {
       return {
         dataForm: {
-          mobilephone: '18175156251',
+          mobilephone: '15874940105',
           password: '123456',
-          openid: ''
+          openid: 'oDnsC1YFswMwYi4uqj10yWHFDE1'
         },
         btnDisabled: false
       }
@@ -40,7 +40,15 @@
     methods: {
       login() {
         this.$http.post('wx/api/login', this.dataForm).then(data => {
-          this.$storage.setItem('Authorization', data.Authorization);
+          this.$store.dispatch('login/login', data.Authorization);
+          this.$http.get('wx/auth/patient/patientInfo').then(data => {
+            if (data.data) {
+              this.$store.dispatch('login/setUser', data.data);
+              this.$router.go(-1);
+            } else {
+              this.$router.replace('/fill-message');
+            }
+          })
         }).catch(err => {
           this.$toast(err.msg);
         });
