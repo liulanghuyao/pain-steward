@@ -32,9 +32,9 @@
     </ll-box>
     <ll-box title="专家团队" moreLink="/patient/doctor/doctorList">
       <ll-drag>
-        <div class="doctor" v-for="(doc,index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail'})">
+        <div class="doctor" v-for="(doc, index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail'})">
           <img src="@/assets/img/doctor.png" alt="">
-          <div class="title">{{doc.name}}</div>
+          <div class="title">{{doc.doctorName}}</div>
           <div class="msg c-gray">{{doc.hospital}}</div>
         </div>
       </ll-drag>
@@ -51,31 +51,13 @@
       </div>
     </ll-box>
     <ll-box title="疼痛治疗科普" moreLink="/patient/doctor/doctorList" :style="{'padding-bottom':0}">
-      <div class="img-text border-b">
+      <div class="img-text border-b" v-for="item in news" :key="item.id">
         <div class="img">
           <img src="@/assets/img/hand.png" alt="">
         </div>
         <div class="text">
-          <div class="title ellipsis">标题文字长度限制一行</div>
-          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
-        </div>
-      </div>
-      <div class="img-text border-b">
-        <div class="img">
-          <img src="@/assets/img/hand.png" alt="">
-        </div>
-        <div class="text">
-          <div class="title ellipsis">标题文字长度限制一行</div>
-          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
-        </div>
-      </div>
-      <div class="img-text border-b">
-        <div class="img">
-          <img src="@/assets/img/hand.png" alt="">
-        </div>
-        <div class="text">
-          <div class="title ellipsis">标题文字长度限制一行</div>
-          <div class="msg ellipsis-2 c-gray">湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院湘雅二医院</div>
+          <div class="title ellipsis">{{item.title}}</div>
+          <div class="msg ellipsis-2 c-gray">{{$utils.removeHtml(item.content)}}</div>
         </div>
       </div>
     </ll-box>
@@ -91,38 +73,31 @@
     },
     data() {
       return {
-        doctors: [{
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }, {
-          name: '张三丰',
-          hospital: '湘雅附二医院'
-        }]
+        doctors: [],
+        news: []
       }
     },
     activated() {
       this.$emit('setIndex', 0);
     },
     created() {
-
+      this.getDoctors();
+      this.getNews();
     },
     methods: {
-
+      getDoctors() {
+        this.$http.get('/wx/index/queryFamousDoctors').then(data => {
+          this.doctors = data.data;
+        })
+      },
+      getNews() {
+        this.$http.get('/wx/index/queryNews', {
+          offset: 0,
+          limit: 5
+        }).then(data => {
+          this.news = data.data.slice(0, 5);
+        })
+      }
     }
   }
 </script>

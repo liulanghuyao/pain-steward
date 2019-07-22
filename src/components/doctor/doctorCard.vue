@@ -1,14 +1,14 @@
 <template>
   <div class="doctor-card">
-    <img class="doctor-card-head" src="@/assets/img/doctor.png" alt="">
+    <img class="doctor-card-head" :src="doctor.certificate" alt="">
     <div class="doctor-card-detail">
       <div class="doctor-card-name-duty ellipsis">
-        <span class="doctor-card-name">唐易迅</span>
+        <span class="doctor-card-name">{{doctor.doctorName}}</span>
         <span class="doctor-card-duty c-gray">主任医生</span>
       </div>
       <div class="doctor-card-hospital-ke c-gray ellipsis">
-        <span class="doctor-card-hospital">中南大学湘雅二医院</span>
-        <span class="doctor-card-ke">疼痛专科</span>
+        <span class="doctor-card-hospital">{{doctor.hospital}}</span>
+        <span class="doctor-card-ke">{{doctor.department}}</span>
       </div>
       <div class="doctor-card-tw-dh c-gray ellipsis">
         <span class="doctor-card-tw">
@@ -24,6 +24,14 @@
 
 <script>
   export default {
+    props: {
+      doctor: {
+        type: Object,
+        default: function() {
+          return {};
+        }
+      },
+    },
     data() {
       return {
 
@@ -77,10 +85,10 @@
           margin-right: 12px;
         }
       }
-      
+
       .doctor-card-tw-dh {
         font-size: 14px;
-      
+
         .doctor-card-tw {
           margin-right: 26px;
         }

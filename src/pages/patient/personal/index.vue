@@ -4,8 +4,8 @@
       <div class="header">
         <img src="@/assets/img/timg.gif" alt="">
         <div class="msg">
-          <div class="name">李时珍</div>
-          <div class="tel c-gray">手机：15874940105</div>
+          <div class="name">{{user.name}}</div>
+          <div class="tel c-gray">手机：{{user.phone}}</div>
         </div>
         <van-button plain type="primary" class="btn" @click="$router.push('/set-password')">修改密码</van-button>
       </div>
@@ -27,7 +27,7 @@
     },
     data() {
       return {
-
+        user: this.$store.getters['login/getUser']
       }
     },
     activated() {
