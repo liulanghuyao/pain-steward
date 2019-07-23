@@ -3,7 +3,7 @@
     <van-search class="search" placeholder="请输入医院或医生姓名查询" v-model="params.doctorName" background="#EDF9F7" />
     <mo-content class="mo-content" :isList="true" :pullLoading="pullLoading" :upLoading="upLoading" :finished="finished"
       @getList="getList">
-      <doctor-card v-for="(item, index) in list" :key="index" :doctor="item" @click.native="goTo(index)"></doctor-card>
+      <doctor-card v-for="(item, index) in list" :key="index" :doctor="item" @click.native="goTo(item.userUuid)"></doctor-card>
     </mo-content>
   </div>
 </template>
@@ -35,19 +35,21 @@
           this.pullLoading = true;
           this.params.offset = 0;
         }
-        this.$http.post('wx/doctor/queryDoctors', this.params).then(data => {}).catch(err => {
-          this.params.offset++;
-          if (err.rows) {
-            if (refresh) {
-              this.list = [];
+        this.$http.post('wx/doctor/queryDoctors', this.params).then(data => {
+          
+            this.params.offset++;
+            if (data.rows) {
+              if (refresh) {
+                this.list = [];
+              }
+              this.list = [...this.list, ...data.rows];
+              if (this.params.offset >= data.total) {
+                this.finished = true;
+              }
             }
-            this.list = [...this.list, ...err.rows];
-            if (this.params.offset >= err.total) {
-              this.finished = true;
-            }
-          }
-          this.pullLoading = false;
-          this.upLoading = false;
+            this.pullLoading = false;
+            this.upLoading = false;
+          
         });
       },
       goTo(id) {

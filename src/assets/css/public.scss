@@ -112,6 +112,12 @@ body {
       line-height: 48px;
       font-size: 17px;
       letter-spacing: 1.55px;
+      
+      &.van-button--plain {
+        height: 48px;
+        line-height: 46px;
+        padding: 0 5px 
+      }
     }
     
     &.van-button--plain {

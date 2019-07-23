@@ -2,32 +2,32 @@
   <div class="wrap">
     <mo-content>
       <ll-box>
-        <doctor-header></doctor-header>
+        <doctor-header :doctor="info"></doctor-header>
       </ll-box>
       <van-tabs v-model="active" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A" color="#0CD5A9">
         <van-tab title="服务">
           <ll-box class="padding-0">
-            <div class="serve border-b">
+            <div class="serve border-b" v-if="info.imageAdvisory == 1">
               <div class="circle bg-blue"></div>
               <div class="detail">
                 <div class="top">
                   <span class="name">图文咨询</span>
-                  <span class="c-orange">￥50/次</span>
+                  <span class="c-orange">￥{{info.imagePrice}}/次</span>
                 </div>
                 <div class="bottom c-gray">使用图文、语音与医生沟通</div>
               </div>
-              <van-button type="primary" class="btn" @click="$router.push('/patient/consult/buyConsult')">去问诊</van-button>
+              <van-button type="primary" class="btn" @click="goTo('image')">去问诊</van-button>
             </div>
-            <div class="serve">
+            <div class="serve" v-if="info.phoneAdvisory == 1">
               <div class="circle bg-blue"></div>
               <div class="detail">
                 <div class="top">
                   <span class="name">电话咨询</span>
-                  <span class="c-orange">￥50/次</span>
+                  <span class="c-orange">￥{{info.phonePrice}}/次</span>
                 </div>
                 <div class="bottom c-gray">快速问诊，下单后24小时内医生回电</div>
               </div>
-              <van-button type="primary" class="btn" @click="$router.push('/patient/consult/buyConsult')">去问诊</van-button>
+              <van-button type="primary" class="btn" @click="goTo('phone')">去问诊</van-button>
             </div>
           </ll-box>
           <ll-text-box title="患者评价">
@@ -35,7 +35,7 @@
               :key="index">
               <div class="top c-gray">
                 <span>名称名称</span>
-                <span class="fr time">2019-08-29</span>
+                <span class="fr time">2019-05-29</span>
               </div>
               <div class="bottom">医生很好很棒，超级赞！</div>
             </div>
@@ -43,13 +43,13 @@
         </van-tab>
         <van-tab title="介绍">
           <ll-box class="mb-0 border-b" title="专业特长">
-            <div class="c-gray">脊髓炎、帕金森、头痛、头晕、多发性硬化</div>
+            <div class="c-gray">{{info.specialtyed}}</div>
           </ll-box>
           <ll-box class="mb-0 border-b" title="职业简介">
-            <div class="c-gray">医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍医生介绍</div>
+            <div class="c-gray">{{info.introduction}}</div>
           </ll-box>
           <ll-box class="mb-0 border-b" title="主要学术成就">
-            <div class="c-gray">主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就主要学术成就</div>
+            <div class="c-gray">{{info.academicAchievement}}</div>
           </ll-box>
           <ll-box class="mb-0" title="掌握微创镇痛技术">
             <div class="c-gray">长沙市十大杰出青年医生]长沙市十大杰出青年医生长沙市十大杰出青年医生............</div>
@@ -72,14 +72,30 @@
     data() {
       return {
         active: 0,
+        info: {},
         evaluates: [{}, {}, {}, {}]
       }
     },
     created() {
-
+      this.getInfo();
     },
     methods: {
-
+      getInfo() {
+        this.$http.get(`wx/doctor/getDoctor/${this.$route.query.id}`).then(data => {
+          if (data.data) {
+            this.info = data.data;
+          }
+        })
+      },
+      goTo(type) {
+        this.$router.push({
+          path: '/patient/consult/buyConsult',
+          query: {
+            id: this.info.userUuid,
+            type: type
+          }
+        })
+      }
     }
   }
 </script>

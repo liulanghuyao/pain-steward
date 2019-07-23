@@ -1,16 +1,16 @@
 <template>
   <div class="doctor-header">
-    <img class="doctor-header-head" src="@/assets/img/doctor.png" alt="">
+    <img class="doctor-header-head" :src="doctor.certificate" alt="">
     <div class="doctor-header-detail">
       <div class="doctor-header-name-duty ellipsis">
-        <span class="doctor-header-name">唐易迅</span>
+        <span class="doctor-header-name">{{doctor.doctorName}}</span>
       </div>
       <div class="doctor-header-hospital-ke c-gray ellipsis">
         <span class="doctor-header-hospital">主任医生</span>
       </div>
       <div class="doctor-header-tw-dh c-gray ellipsis">
-        <span class="doctor-header-tw">中南大学湘雅二医院</span>
-        <span class="doctor-header-dh">疼痛专科</span>
+        <span class="doctor-header-tw">{{doctor.hospital}}</span>
+        <span class="doctor-header-dh">{{doctor.department}}</span>
       </div>
     </div>
   </div>
@@ -18,6 +18,14 @@
 
 <script>
   export default {
+    props: {
+      doctor: {
+        type: Object,
+        default: function() {
+          return {};
+        }
+      },
+    },
     data() {
       return {
 
@@ -26,9 +34,7 @@
     created() {
 
     },
-    methods: {
-
-    }
+    methods: {}
   }
 </script>
 

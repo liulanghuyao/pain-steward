@@ -3,10 +3,10 @@
     <div class="ll-img-show-rect" v-for="(item, index) in list" :key="index">
       <img class="ll-img-show-img" :src="item" alt="" @click="showImg(index)">
     </div>
-    <div class="ll-img-show-rect" v-if="upload-list.length!=0" @click="show=true">
+    <div class="ll-img-show-rect" v-if="upload-list.length>0" @click="show=true">
       <van-icon name="plus" class="ll-img-show-add c-gray" />
     </div>
-    <van-popup v-model="show" v-if="upload-list.length!=0" position="bottom" round :style="{ height: '85%' }">
+    <van-popup v-model="show" v-if="upload-list.length>0" position="bottom" round :style="{ height: '85%' }">
       <div class="upload-box">
         <ll-box>
           <ll-tip circle>

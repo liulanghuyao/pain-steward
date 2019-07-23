@@ -33,6 +33,12 @@ const ajax = {
     },
     withCredentials: true,
   }),
+  postForm: axios.create({
+    headers: {
+      'Content-Type': 'multipart/form-data; charset=UTF-8',
+    },
+    withCredentials: true,
+  }),
   postJson: axios.create({
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -45,7 +51,7 @@ function res(response) {
   store.dispatch('loading/hide');
   if (response.data && response.data.code === 401) { // 401, token失效
     Toast('身份验证已过期，请重新登录');
-    store.dispatch('login/setLogin', false);
+    store.dispatch('login/logout');
     router.push({
       path: '/login',
       query: {
@@ -100,6 +106,27 @@ ajax.post.interceptors.response.use(response => {
 /**
  * 发送请求拦截
  */
+ajax.postForm.interceptors.request.use(config => {
+  storage.getItem('Authorization') && (config.headers['Authorization'] = storage.getItem('Authorization'));
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
+
+/**
+ * 接收响应拦截
+ */
+ajax.postForm.interceptors.response.use(response => {
+  res(response);
+  return response;
+}, error => {
+  res(error);
+  return Promise.reject(error);
+});
+
+/**
+ * 发送请求拦截
+ */
 ajax.postJson.interceptors.request.use(config => {
   storage.getItem('Authorization') && (config.headers['Authorization'] = storage.getItem('Authorization'));
   return config;
@@ -128,7 +155,7 @@ function get(url, params, loading) {
       }).then(({
         data
       }) => {
-        if (data && data.code == 0) {
+        if (data && (data.code == 0 || data.rows)) {
           resolve(data);
         } else {
           reject(data);
@@ -148,12 +175,37 @@ function get(url, params, loading) {
   });
 }
 
-// post form 请求
+// post 请求
 function post(url, data, loading) {
   loading && store.dispatch('loading/show');
   return new Promise((resolve, reject) => {
     if ((!window.api && navigator.onLine) || (window.api && api.connectionType != 'none')) {
       ajax.post.post(url, data).then(({
+        data
+      }) => {
+        if (data && (data.code == 0 || data.rows)) {
+          resolve(data);
+        } else {
+          reject(data);
+        }
+      }).catch(error => {
+        reject(error);
+      });
+    } else {
+      upload(url, data, 'post');
+      resolve({
+        code: 0
+      });
+    }
+  });
+}
+
+// post 请求（上传文件）
+function postForm(url, data, loading) {
+  loading && store.dispatch('loading/show');
+  return new Promise((resolve, reject) => {
+    if ((!window.api && navigator.onLine) || (window.api && api.connectionType != 'none')) {
+      ajax.postForm.post(url, data).then(({
         data
       }) => {
         if (data && data.code == 0) {
@@ -165,7 +217,7 @@ function post(url, data, loading) {
         reject(error);
       });
     } else {
-      upload(url, data, 'post');
+      upload(url, data, 'postForm');
       resolve({
         code: 0
       });
@@ -214,6 +266,7 @@ function upload(url, data, type) {
 export default {
   get,
   post,
+  postForm,
   postJson,
   baseUrl
 }

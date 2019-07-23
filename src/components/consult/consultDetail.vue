@@ -7,13 +7,13 @@
       <ll-cell title="接诊时间" titleClass="c-gray" value="医生24小时内回复"></ll-cell>
     </ll-box>
     <ll-box title="病情描述">
-      <div class="c-gray">请您详细提交需解决的关键问题，简要提供相关病史资料及主要检查结果，以便医生更加准确分析您的病情。</div>
+      <div class="c-gray">{{order.conditionDesc}}</div>
     </ll-box>
     <ll-box title="病情图片">
       <ll-img-show :list="imgs"></ll-img-show>
     </ll-box>
-    <ll-box title="联系电话">
-      <div class="c-orange">15874940105</div>
+    <ll-box title="联系电话" v-if="order.serviceType=='phone'">
+      <div class="c-orange">{{order.patientPhone}}</div>
     </ll-box>
   </div>
 </template>
@@ -25,21 +25,30 @@
     components: {
       llImgShow
     },
+    props: {
+      order: {
+        type: Object,
+        default: function() {
+          return {};
+        }
+      },
+    },
     data() {
       return {
-        imgs: [
-          require('@/assets/img/doctor.png'),
-          require('@/assets/img/doctor.png'),
-          require('@/assets/img/doctor.png'),
-          require('@/assets/img/doctor.png'),
-        ]
+        imgs: []
       }
     },
     created() {
-
+      this.setImgs();
     },
     methods: {
-
+      setImgs() {
+        if (this.order.conditionDescImg) {
+          this.$nextTick(() => {
+            this.imgs = this.order.conditionDescImg.split(',');
+          })
+        }
+      }
     }
   }
 </script>
