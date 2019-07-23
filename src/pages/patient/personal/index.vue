@@ -1,18 +1,13 @@
 <template>
   <div class="wrap">
     <ll-box>
-      <div class="header" v-if="this.$store.getters['login/isLogin']">
+      <div class="header">
         <img src="@/assets/img/timg.gif" alt="">
         <div class="msg">
-          <div class="name">李时珍</div>
-          <div class="tel c-gray">手机：15874940105</div>
+          <div class="name">{{user.name}}</div>
+          <div class="tel c-gray">手机：{{user.phone}}</div>
         </div>
         <van-button plain type="primary" class="btn" @click="$router.push('/set-password')">修改密码</van-button>
-      </div>
-      <div class="header" v-if="!this.$store.getters['login/isLogin']">
-        <div class="login-box t-a-c">
-          <van-button type="primary" class="btn login-btn" @click="$router.push('/login')">登 录</van-button>
-        </div>
       </div>
     </ll-box>
     <ll-box :style="{padding:0}">
@@ -32,7 +27,7 @@
     },
     data() {
       return {
-
+        user: this.$store.getters['login/getUser']
       }
     },
     activated() {
@@ -53,23 +48,6 @@
       display: flex;
       align-items: center;
       margin: 8px 0;
-
-      .login-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 50px;
-
-        .login-btn {
-          width: 140px;
-          height: 42px;
-
-          &.van-button--normal {
-            font-size: 17px;
-          }
-        }
-      }
 
       img {
         width: 50px;

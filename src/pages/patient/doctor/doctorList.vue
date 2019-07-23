@@ -1,8 +1,9 @@
 <template>
   <div class="wrap">
-    <mo-content class="mo-content">
-      <van-search class="search" placeholder="请输入医院或医生姓名查询" v-model="value" background="#EDF9F7" />
-      <doctor-card v-for="(item, index) in doctors" :key="index" :doctor="item" @click.native="goTo(index)"></doctor-card>
+    <van-search class="search" placeholder="请输入医院或医生姓名查询" v-model="params.doctorName" background="#EDF9F7" />
+    <mo-content class="mo-content" :isList="true" :pullLoading="pullLoading" :upLoading="upLoading" :finished="finished"
+      @getList="getList">
+      <doctor-card v-for="(item, index) in list" :key="index" :doctor="item" @click.native="goTo(index)"></doctor-card>
     </mo-content>
   </div>
 </template>
@@ -16,26 +17,39 @@
     },
     data() {
       return {
-        value: '',
-        doctors: [{
-
-        }, {
-
-        }, {
-
-        }, {
-
-        }, {
-
-        }, {
-
-        }]
+        params: {
+          offset: 0,
+          limit: 10,
+          doctorName: ''
+        },
+        pullLoading: false,
+        upLoading: false,
+        finished: false,
+        list: []
       }
     },
-    created() {
-
-    },
+    created() {},
     methods: {
+      getList(refresh) {
+        if (refresh) {
+          this.pullLoading = true;
+          this.params.offset = 0;
+        }
+        this.$http.post('wx/doctor/queryDoctors', this.params).then(data => {}).catch(err => {
+          this.params.offset++;
+          if (err.rows) {
+            if (refresh) {
+              this.list = [];
+            }
+            this.list = [...this.list, ...err.rows];
+            if (this.params.offset >= err.total) {
+              this.finished = true;
+            }
+          }
+          this.pullLoading = false;
+          this.upLoading = false;
+        });
+      },
       goTo(id) {
         this.$router.push({
           path: '/patient/doctor/doctorDetail',
@@ -51,13 +65,14 @@
 <style scoped lang="scss">
   .wrap {
     .mo-content {
-      padding: 50px 0 10px;
+      padding: 50px 0 20px;
     }
 
     .search {
       position: fixed;
       top: 0;
       width: 100%;
+      z-index: 10;
     }
   }
 </style>

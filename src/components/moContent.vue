@@ -1,17 +1,58 @@
 <template>
   <div class="mo-content">
-    <slot></slot>
+    <van-pull-refresh v-model="pullLoadingRe" @refresh="getList(true)" v-if="isList">
+      <van-list v-model="upLoadingRe" :finished="finished" finished-text="没有更多了" @load="getList(false)">
+        <slot></slot>
+      </van-list>
+    </van-pull-refresh>
+    <slot v-if="!isList"></slot>
   </div>
 </template>
 
 <script>
   export default {
     name: 'moContent',
-    data() {
-      return {
-
+    props: {
+      pullLoading: {
+        type: Boolean,
+        default: false
+      },
+      upLoading: {
+        type: Boolean,
+        default: false
+      },
+      finished: {
+        type: Boolean,
+        default: false
+      },
+      isList: {
+        type: Boolean,
+        default: false
       }
-    }
+    },
+    data() {
+      return {}
+    },
+    created() {},
+    methods: {
+      getList(refresh) {
+        this.$emit('getList', refresh);
+      }
+    },
+    computed: {
+      pullLoadingRe: {
+        get() {
+          return this.pullLoading;
+        },
+        set(val) {}
+      },
+      upLoadingRe: {
+        get() {
+          return this.upLoading;
+        },
+        set(val) {}
+      },
+    },
   }
 </script>
 
@@ -28,6 +69,15 @@
 
     &.white {
       background: #fff;
+    }
+
+    .van-pull-refresh {
+      position: relative;
+      height: 100%;
+
+      .van-pull-refresh__track {
+        height: 100%;
+      }
     }
   }
 </style>
