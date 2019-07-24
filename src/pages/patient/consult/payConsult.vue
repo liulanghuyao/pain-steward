@@ -46,9 +46,14 @@
         })
       },
       pay() {
-        this.$router.push({
+        this.$http.post('wx/auth/order/confirm', {
+          orderId: this.order.uuid
+        }).then(data => {
+          
+        });
+        /* this.$router.push({
           path: '/patient/consult/payResultConsult'
-        })
+        }) */
       }
     }
   }
