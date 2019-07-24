@@ -72,7 +72,7 @@
       }
     },
     created() {
-
+      this.$utils.setState(['showSex', 'showAge', 'showDistrict'], this);
     },
     methods: {
       onConfirmSex(value) {

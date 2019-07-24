@@ -32,7 +32,7 @@
     </ll-box>
     <ll-box title="专家团队" moreLink="/patient/doctor/doctorList">
       <ll-drag>
-        <div class="doctor" v-for="(doc, index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail'})">
+        <div class="doctor" v-for="(doc, index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail',query:{id:doc.userUuid}})">
           <img src="@/assets/img/doctor.png" alt="">
           <div class="title">{{doc.doctorName}}</div>
           <div class="msg c-gray">{{doc.hospital}}</div>
@@ -93,9 +93,9 @@
       getNews() {
         this.$http.get('/wx/index/queryNews', {
           offset: 0,
-          limit: 5
+          limit: 3
         }).then(data => {
-          this.news = data.data.slice(0, 5);
+          this.news = data.data.slice(0, 3);
         })
       }
     }

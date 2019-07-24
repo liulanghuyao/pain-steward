@@ -65,6 +65,7 @@
       $route(to, from) {
         this.$store.dispatch('loading/hide');
         this.$store.dispatch('route/setRoute', this.$route);
+        this.$store.dispatch('route/setPushState', false);
         // 如果to索引大于from索引,判断为前进状态,反之则为后退状态
         let toRank = to.meta.rank || 0;
         let fromRank = from.meta.rank || 0;

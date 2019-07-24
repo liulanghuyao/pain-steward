@@ -177,6 +177,49 @@ function deleteDoc() {
   }
 }
 
+// 获取路径后的参数
+function getRequest() {
+  var url = location.href; //获取url中"?"符后的字串
+  var theRequest = new Object();
+  if (url.indexOf("?") != -1) {
+    var str = url.substr(url.lastIndexOf('?') + 1);
+    var strs = str.split("&");
+    for (var i = 0; i < strs.length; i++) {
+      theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+    }
+  }
+  return theRequest;
+}
+
+// 设置pushState 点击后退关闭元素
+function setState(key, vm) {
+  if (key.constructor == String) {
+    key = [key];
+  }
+  key.forEach((e, i) => {
+    vm.$watch(e, function(val, oldval) {
+      if (val) {
+        addState(() => {
+          vm[e] = false;
+        });
+      } else {
+        removeState();
+      }
+    });
+  })
+}
+
+function addState(fn) {
+  history.pushState(null, null, document.URL);
+  store.dispatch('route/setPushState', true);
+  store.dispatch('route/setPushStateFn', fn);
+}
+
+function removeState() {
+  history.go(-1);
+  store.dispatch('route/setPushState', false);
+}
+
 export default {
   removeHtml,
   strToDate,
@@ -191,5 +234,9 @@ export default {
   random,
   setCache,
   openFile,
-  deleteDoc
+  deleteDoc,
+  getRequest,
+  setState,
+  addState,
+  removeState
 }

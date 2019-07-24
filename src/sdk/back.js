@@ -1,4 +1,5 @@
 import utils from '../utils';
+import store from '../store';
 
 function muiBack(vue) {
   // //处理逻辑：1秒内，连续两次按返回键，则退出应用；
@@ -78,6 +79,13 @@ function apiBack(vue) {
     }
   });
 }
+
+window.addEventListener('popstate', function() {
+  if (store.getters['route/getPushState']) {
+    history.pushState(null, null, document.URL);
+    store.getters['route/getPushStateFn']();
+  }
+});
 
 export default {
   muiBack,

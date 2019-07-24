@@ -10,7 +10,7 @@ const setting = {
   modules: {
     login,
     loading,
-    route
+    route,
   }
 };
 

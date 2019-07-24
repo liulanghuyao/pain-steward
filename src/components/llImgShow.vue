@@ -10,9 +10,9 @@
       <div class="upload-box">
         <ll-box>
           <ll-tip circle>
-            <div>注：该类型报告最多可上传{{upload-list.length}}张，您只需选择两次相关的报告即可</div>
+            <div>注：最多可上传{{upload-list.length}}张图片</div>
           </ll-tip>
-          <van-uploader class="upload" v-model="fileList" multiple="" :max-count="upload-list.length" />
+          <van-uploader class="upload" v-model="fileList" :multiple="true" :max-count="upload-list.length" />
         </ll-box>
         <div class="btn-box">
           <van-button type="primary" class="btn btn-block" @click="uploadFile()">上传</van-button>
@@ -42,7 +42,7 @@
       upload: {
         type: Number,
         default: 0
-      }
+      },
     },
     data() {
       return {
@@ -51,7 +51,7 @@
       }
     },
     created() {
-
+      this.$utils.setState('show', this);
     },
     methods: {
       showImg(index) {
@@ -67,7 +67,7 @@
         this.fileList = [];
         this.show = false;
       }
-    }
+    },
   }
 </script>
 

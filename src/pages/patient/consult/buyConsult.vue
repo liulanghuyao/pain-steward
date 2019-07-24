@@ -8,7 +8,7 @@
         <textarea v-model="dataForm.conditionDesc" class="textarea" placeholder="请您详细提交需解决的关键问题，简要提供相关病史资料及主要检查结果，以便医生更加准确分析您的病情。"></textarea>
       </ll-box>
       <ll-box title="病情图片">
-        <van-uploader class="upload" v-model="fileList" multiple="" :max-count="4" :after-read="afterRead" @delete="afterRead" />
+        <van-uploader class="upload" v-model="fileList" :multiple="true" :max-count="4" :after-read="afterRead" @delete="afterRead" />
         <div class="file-describe c-gray">症状部位，检查报告或者其他病情资料，最多可上传4张</div>
       </ll-box>
       <ll-box title="联系电话确认" v-if="dataForm.serviceType=='phone'">

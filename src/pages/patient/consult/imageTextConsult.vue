@@ -23,7 +23,7 @@
         <span class="send-btn" v-if="!showBtn" @click="sendImgText()">发送</span>
       </div>
       <div class="file-box" v-if="showFileBox">
-        <van-uploader v-model="fileList" :max-count="1" />
+        <van-uploader class="upload" v-model="fileList" :max-count="1" />
       </div>
     </div>
   </div>
@@ -52,6 +52,7 @@
       this.getOldMsg();
       this.getNewMsg();
       this.goToBottom();
+      this.$utils.setState(['showFileBox'], this);
     },
     methods: {
       sendImgText() {
@@ -259,7 +260,7 @@
       }
 
       .file-box {
-        margin-top: 18px;
+        margin: 13px 0 5px;
       }
     }
   }
