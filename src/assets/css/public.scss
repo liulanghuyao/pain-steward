@@ -178,6 +178,7 @@ body {
 
 .upload {
   vertical-align: top;
+  
   .van-uploader__upload {
     width: 70px;
     height: 70px;
@@ -201,6 +202,8 @@ body {
   
   .van-uploader__preview {
     margin: 0 18px 10px 0;
+    width: 70px;
+    height: 70px;
     border-radius: 6px;
     overflow: hidden;
     
@@ -214,10 +217,10 @@ body {
     &:nth-last-child(4) {
       margin-bottom: 0;
     }
-  }
-  
-  .van-uploader__preview-image {
-    width: 70px;
-    height: 70px;
+    
+    .van-uploader__preview-image {
+      width: 70px;
+      height: 70px;
+    }
   }
 }

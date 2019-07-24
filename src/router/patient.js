@@ -151,5 +151,8 @@ export default [{
     path: '/patient/home',
     name: 'home',
     component: home
-  }]
+  }],
+  meta: {
+    keepAlive: true
+  }
 }]
