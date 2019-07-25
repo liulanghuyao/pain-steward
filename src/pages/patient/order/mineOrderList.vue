@@ -16,7 +16,7 @@
     },
     data() {
       return {
-        params: {
+        pages: {
           offset: 0,
           limit: 10,
         },
@@ -33,16 +33,16 @@
       getList(refresh) {
         if (refresh) {
           this.pullLoading = true;
-          this.params.offset = 0;
+          this.pages.offset = 0;
         }
-        this.$http.post('wx/auth/order/query', this.params).then(data => {
-          this.params.offset++;
+        this.$http.post('wx/auth/order/query', this.pages).then(data => {
+          this.pages.offset++;
           if (data.rows) {
             if (refresh) {
               this.list = [];
             }
             this.list = [...this.list, ...data.rows];
-            if (this.params.offset >= Math.ceil(data.total / 10)) {
+            if (this.pages.offset >= Math.ceil(data.total / 10)) {
               this.finished = true;
             }
           }

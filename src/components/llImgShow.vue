@@ -62,7 +62,7 @@
       },
       uploadFile() {
         this.fileList.forEach((e, i) => {
-          this.list.push(e.content);
+          this.list.push(this.$http.baseUrl + e.content);
         });
         this.fileList = [];
         this.show = false;

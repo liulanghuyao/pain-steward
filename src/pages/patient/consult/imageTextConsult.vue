@@ -5,18 +5,18 @@
         <ll-tip msg="您可以先发出想咨询的问题，医生将会在24小时内回复您的咨询。若医生未在24小时内回复，系统将自动关闭本次咨询并自动为您退款。"></ll-tip>
       </ll-box>
       <div class="time">6月18 18:12:33</div>
-      <div class="msg-box" :class="{left:item.who==2}" v-for="(item, index) in msgs" :key="index">
+      <div class="msg-box" :class="{left:item.createdType=='doctor'}" v-for="(item, index) in msgs" :key="index">
         <div class="head"></div>
         <div class="box clearfix">
-          <span class="text" v-if="item.type==1">{{item.text}}</span>
-          <img class="img" :src="item.img" v-if="item.type==2" @click="openImg(item.imgIndex)">
+          <span class="text" v-if="item.type=='text'">{{item.advisoryContent}}</span>
+          <img class="img" :src="$http.baseUrl+item.advisoryContent" v-if="item.type=='image'" @click="openImg(item.imgIndex)">
         </div>
       </div>
       <div id="bottom"></div>
     </mo-content>
     <div class="input-file-box border-t">
       <div class="input-box">
-        <input type="text" v-model="text" class="text-input" @focus="closeFileBox()">
+        <input type="text" v-model="text" class="text-input">
         <span class="add-btn" v-if="showBtn" @click="showFileBox=true">
           <van-icon name="plus" />
         </span>
@@ -46,7 +46,12 @@
         msgs: [],
         showFileBox: false,
         fileList: [],
-        room: {}
+        room: {},
+        pages: {
+          offset: 0,
+          limit: 10,
+          roomUuid: this.$route.query.orderUuid
+        }
       }
     },
     created() {
@@ -67,13 +72,11 @@
       sendImgText() {
         let dataForm = new FormData();
         dataForm.append('advisoryContent', this.text);
-        dataForm.append('roomUuid', this.room.uuid);
+        dataForm.append('roomUuid', this.room.orderUuid);
         this.fileList.forEach((e, i) => {
           dataForm.append('files', e.file);
         })
-        this.$http.postForm('wx/auth/advisoryRoom/chat', dataForm).then(data => {
-
-        })
+        this.$http.postForm('wx/auth/advisoryRoom/chat', dataForm);
         if (this.text) {
           this.msgs.push({
             type: 1,
@@ -87,8 +90,8 @@
             who: 1,
             img: this.fileList[0].content,
           });
-          this.closeFileBox();
         }
+        this.closeFileBox();
         this.goToBottom();
       },
       openImg(index) {
@@ -103,42 +106,16 @@
         })
       },
       getOldMsg() {
-        this.msgs = [{
-          type: 1,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: require('@/assets/img/doctor.png')
-        }, {
-          type: 1,
-          who: 2,
-          text: '我最近的血糖值异常',
-          img: require('@/assets/img/doctor.png')
-        }, {
-          type: 1,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: require('@/assets/img/doctor.png')
-        }, {
-          type: 2,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: require('@/assets/img/doctor.png')
-        }, {
-          type: 2,
-          who: 1,
-          text: '我最近的血糖值异常',
-          img: require('@/assets/img/doctor.png')
-        }]
+        this.$http.get('wx/auth/advisoryRoom/chatContents', this.pages).then(data => {
+          if (data.rows) {
+            this.msgs = [...this.msgs, ...data.rows];
+          }
+        });
       },
       getNewMsg() {
         this.interval = setInterval(() => {
-          this.msgs.push({
-            type: 2,
-            who: 2,
-            text: '我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常我最近的血糖值异常',
-            img: require('@/assets/img/doctor.png')
-          });
-        }, 20000)
+          //this.getOldMsg();
+        }, 3000)
       },
       closeFileBox() {
         this.showFileBox = false;
@@ -158,9 +135,9 @@
         this.imgs = [];
         let imgIndex = 0;
         this.msgs.forEach((e, i) => {
-          if (e.type == 2) {
+          if (e.type == 'image') {
             e.imgIndex = imgIndex;
-            this.imgs.push(e.img);
+            this.imgs.push(this.$http.baseUrl + e.advisoryContent);
             imgIndex++;
           }
         })
@@ -176,7 +153,7 @@
     }
 
     .time {
-      width: 108px;
+      width: 120px;
       margin: 16px auto;
       padding: 2px 8px;
       background: #fff;
