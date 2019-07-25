@@ -130,26 +130,26 @@ export default [{
     rank: 1
   }
 }, {
-  path: '/patient/index',
+  path: '/patient',
   name: 'index',
   component: index,
   children: [{
-    path: '/patient/consult/list',
+    path: 'consult/list',
     name: 'consultList',
     component: consultList,
     meta: {
       title: '咨询'
     }
   }, {
-    path: '/patient/personal',
+    path: 'personal',
     name: 'personal',
     component: personal,
     meta: {
       title: '我的'
     }
   }, {
-    path: '/patient/home',
-    name: 'home',
+    path: 'home',
+    name: 'patientHome',
     component: home
   }],
   meta: {

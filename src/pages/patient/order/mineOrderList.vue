@@ -2,7 +2,7 @@
   <div class="wrap">
     <mo-content class="mo-content" :isList="true" :pullLoading="pullLoading" :upLoading="upLoading" :finished="finished"
       @getList="getList">
-      <order-card></order-card>
+      <order-card v-for="(item, index) in list" :key="index" :order="item" @click.native="goTo(item)"></order-card>
     </mo-content>
   </div>
 </template>
@@ -42,7 +42,7 @@
               this.list = [];
             }
             this.list = [...this.list, ...data.rows];
-            if (this.params.offset >= data.total) {
+            if (this.params.offset >= Math.ceil(data.total / 10)) {
               this.finished = true;
             }
           }
@@ -50,11 +50,11 @@
           this.upLoading = false;
         });
       },
-      goTo(id) {
+      goTo(order) {
         this.$router.push({
-          path: '/patient/doctor/doctorDetail',
+          path: '/patient/consult/payResultConsult',
           query: {
-            id: id
+            id: order.uuid
           }
         })
       }

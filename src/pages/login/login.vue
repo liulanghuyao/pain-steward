@@ -29,7 +29,7 @@
         dataForm: {
           mobilephone: '15874940105',
           password: '123456',
-          openid: 'oDnsC1YFswMwYi4uqj10yWHFDE1'
+          openid: 'oDnsC1TKe9mSQ50IhZt77o_5yhE0'
         },
         btnDisabled: false
       }

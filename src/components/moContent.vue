@@ -5,7 +5,7 @@
         <slot></slot>
       </van-list>
     </van-pull-refresh>
-    <slot v-if="!isList"></slot>
+    <slot v-if="!isList" class="mo-content-center"></slot>
   </div>
 </template>
 
@@ -63,7 +63,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0 0 20px;
     overflow: auto;
     background: #f5f5f5;
 
@@ -73,11 +72,15 @@
 
     .van-pull-refresh {
       position: relative;
-      height: 100%;
+      min-height: 100%;
 
       .van-pull-refresh__track {
         height: 100%;
       }
+    }
+    
+    .mo-content-center {
+      padding: 0 0 20px;
     }
   }
 </style>
