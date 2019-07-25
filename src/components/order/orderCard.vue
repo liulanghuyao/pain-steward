@@ -32,11 +32,12 @@
     data() {
       return {
         statusClass: {
-          'c-orange': this.order.orderStatus == 0 || this.order.orderStatus == 4 || this.order.orderStatus == 6,
-          'c-green': this.order.orderStatus == 1 || this.order.orderStatus == 2 || this.order.orderStatus == 3,
-          'c-red': this.order.orderStatus == 5,
+          'c-orange': this.order.orderStatus == 0 || this.order.orderStatus == 2 || this.order.orderStatus == 6 || this
+            .order.orderStatus == 8 || this.order.orderStatus == 10,
+          'c-green': this.order.orderStatus == 1 || this.order.orderStatus == 3 || this.order.orderStatus == 9,
+          'c-blue': this.order.orderStatus == 4 || this.order.orderStatus == 5 || this.order.orderStatus == 7,
         },
-        statusText: ['待支付', '已支付', '服务中', '服务结束', '支付失败', '自动结束', '取消']
+        statusText: ['待支付', '已支付', '支付失败', '服务中', '服务结束', '主动退款', '主动退款失败', '自动退款', '自动退款失败', '医生应答', '关闭']
       }
     },
     created() {

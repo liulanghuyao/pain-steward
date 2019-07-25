@@ -1,16 +1,16 @@
 <template>
   <div class="wrap">
     <mo-content>
-      <result-tip></result-tip>
+      <result-tip :order="order"></result-tip>
       <consult-detail :order="order" :doctor="doctor"></consult-detail>
       <ll-box title="缴费详情" :style="{'padding-bottom':0}">
-        <ll-cell title="支付金额" titleClass="c-gray" valueClass="c-orange" value="50元"></ll-cell>
-        <ll-cell title="平台单号" titleClass="c-gray" value="2343413414114114"></ll-cell>
-        <ll-cell title="微信单号" titleClass="c-gray" value="234183084109840184091840918"></ll-cell>
-        <ll-cell title="支付状态" titleClass="c-gray" valueClass="c-green" value="已支付"></ll-cell>
-        <ll-cell title="支付时间" titleClass="c-gray" value="2018-23-12 12:33"></ll-cell>
+        <ll-cell title="支付金额" titleClass="c-gray" valueClass="c-orange" :value="`${order.payMoney}元`"></ll-cell>
+        <ll-cell title="平台单号" titleClass="c-gray" :value="order.orderNo"></ll-cell>
+        <ll-cell title="微信单号" titleClass="c-gray" :value="order.payNo" v-if="order.payNo"></ll-cell>
+        <ll-cell title="支付状态" titleClass="c-gray" valueClass="c-green" :value="statusText[order.orderStatus]"></ll-cell>
+        <ll-cell title="支付时间" titleClass="c-gray" :value="order.payTime" v-if="order.payTime"></ll-cell>
       </ll-box>
-      <div class="btn-box">
+      <div class="btn-box" v-if="order.orderStatus==1||order.orderStatus==3||order.orderStatus==9">
         <van-button type="primary" class="btn btn-block" @click="start()">发起咨询</van-button>
       </div>
     </mo-content>
@@ -32,7 +32,7 @@
       return {
         order: {},
         doctor: {},
-        wxPay: {}
+        statusText: ['待支付', '已支付', '支付失败', '服务中', '服务结束', '主动退款', '主动退款失败', '自动退款', '自动退款失败', '医生应答', '关闭']
       }
     },
     created() {
@@ -57,7 +57,10 @@
       },
       start() {
         this.$router.push({
-          path: '/patient/consult/imageText'
+          path: '/patient/consult/imageText',
+          query: {
+            orderUuid: this.order.uuid
+          }
         })
       }
     }

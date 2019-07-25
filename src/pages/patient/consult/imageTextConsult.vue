@@ -45,17 +45,35 @@
         imgs: [],
         msgs: [],
         showFileBox: false,
-        fileList: []
+        fileList: [],
+        room: {}
       }
     },
     created() {
+      this.createChat();
       this.getOldMsg();
       this.getNewMsg();
       this.goToBottom();
       this.$utils.setState(['showFileBox'], this);
     },
     methods: {
+      createChat() {
+        this.$http.put(`wx/auth/advisoryRoom/startAdvisoryRoom/${this.$route.query.orderUuid}`).then(data => {
+          if (data.data) {
+            this.room = data.data;
+          }
+        })
+      },
       sendImgText() {
+        let dataForm = new FormData();
+        dataForm.append('advisoryContent', this.text);
+        dataForm.append('roomUuid', this.room.uuid);
+        this.fileList.forEach((e, i) => {
+          dataForm.append('files', e.file);
+        })
+        this.$http.postForm('wx/auth/advisoryRoom/chat', dataForm).then(data => {
+
+        })
         if (this.text) {
           this.msgs.push({
             type: 1,
