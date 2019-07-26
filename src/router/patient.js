@@ -148,7 +148,7 @@ export default [{
       title: '我的'
     }
   }, {
-    path: 'home',
+    path: '',
     name: 'patientHome',
     component: home
   }],

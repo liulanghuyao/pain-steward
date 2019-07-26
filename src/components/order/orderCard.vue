@@ -2,7 +2,8 @@
   <div class="order-card">
     <div class="order-card-header c-gray border-b clearfix">
       <span class="fl order-card-time">{{order.createdTime}}</span>
-      <span class="fr order-card-status">{{order.serviceType == 'image'?'图文咨询':'电话咨询'}}</span>
+      <span class="fr order-card-status" v-if="type==1">{{order.serviceType == 'image'?'图文咨询':'电话咨询'}}</span>
+      <span class="fr order-card-status" :class="statusClass" v-if="type==2">{{statusText1[order.orderStatus]}}</span>
     </div>
     <div class="order-card-center">
       <img src="@/assets/img/doctor.png" alt="">
@@ -12,7 +13,7 @@
         <div class="order-card-hospital c-gray">{{order.doctorHospital}} 疼痛专科</div>
       </div>
     </div>
-    <div class="order-card-footer border-t clearfix" :class="statusClass">
+    <div class="order-card-footer border-t clearfix" :class="statusClass" v-if="type==1">
       <span class="fl">{{statusText[order.orderStatus]}}</span>
       <span class="fr">￥{{order.payMoney}}</span>
     </div>
@@ -28,6 +29,10 @@
           return {};
         }
       },
+      type: {
+        type: Number,
+        default: 1
+      },
     },
     data() {
       return {
@@ -37,7 +42,8 @@
           'c-green': this.order.orderStatus == 1 || this.order.orderStatus == 3 || this.order.orderStatus == 9,
           'c-blue': this.order.orderStatus == 4 || this.order.orderStatus == 5 || this.order.orderStatus == 7,
         },
-        statusText: ['待支付', '已支付', '支付失败', '服务中', '服务结束', '主动退款', '主动退款失败', '自动退款', '自动退款失败', '医生应答', '关闭']
+        statusText: ['待支付', '已支付', '支付失败', '服务中', '服务结束', '主动退款', '主动退款失败', '自动退款', '自动退款失败', '医生应答', '关闭'],
+        statusText1: ['待支付', '待咨询', '支付失败', '服务中', '已结束', '已退款', '退款失败', '已退款', '退款失败', '服务中', '已关闭']
       }
     },
     created() {

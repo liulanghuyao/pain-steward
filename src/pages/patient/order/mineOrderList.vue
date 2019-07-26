@@ -51,12 +51,21 @@
         });
       },
       goTo(order) {
-        this.$router.push({
-          path: '/patient/consult/payResultConsult',
-          query: {
-            id: order.uuid
-          }
-        })
+        if (order.orderStatus == 0) {
+          this.$router.push({
+            path: '/patient/consult/payConsult',
+            query: {
+              id: order.uuid
+            }
+          })
+        } else {
+          this.$router.push({
+            path: '/patient/consult/payResultConsult',
+            query: {
+              id: order.uuid
+            }
+          })
+        }
       }
     }
   }

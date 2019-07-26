@@ -33,7 +33,7 @@
     <ll-box title="专家团队" moreLink="/patient/doctor/doctorList">
       <ll-drag>
         <div class="doctor" v-for="(doc, index) in doctors" :key="index" @click="$router.push({path:'/patient/doctor/doctorDetail',query:{id:doc.userUuid}})">
-          <img src="@/assets/img/doctor.png" alt="">
+          <img :src="doc.certificate" alt="">
           <div class="title">{{doc.doctorName}}</div>
           <div class="msg c-gray">{{doc.hospital}}</div>
         </div>

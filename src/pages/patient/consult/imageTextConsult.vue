@@ -50,7 +50,7 @@
         pages: {
           offset: 0,
           limit: 10,
-          roomUuid: this.$route.query.orderUuid
+          roomUuid: this.$route.query.id
         }
       }
     },
@@ -63,7 +63,7 @@
     },
     methods: {
       createChat() {
-        this.$http.put(`wx/auth/advisoryRoom/startAdvisoryRoom/${this.$route.query.orderUuid}`).then(data => {
+        this.$http.put(`wx/auth/advisoryRoom/startAdvisoryRoom/${this.$route.query.id}`).then(data => {
           if (data.data) {
             this.room = data.data;
           }

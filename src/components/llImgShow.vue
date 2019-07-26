@@ -1,7 +1,7 @@
 <template>
   <div class="ll-img-show">
     <div class="ll-img-show-rect" v-for="(item, index) in list" :key="index">
-      <img class="ll-img-show-img" :src="item" alt="" @click="showImg(index)">
+      <img class="ll-img-show-img" :src="$http.baseUrl + item" alt="" @click="showImg(index)">
     </div>
     <div class="ll-img-show-rect" v-if="upload-list.length>0" @click="show=true">
       <van-icon name="plus" class="ll-img-show-add c-gray" />
@@ -62,7 +62,7 @@
       },
       uploadFile() {
         this.fileList.forEach((e, i) => {
-          this.list.push(this.$http.baseUrl + e.content);
+          this.list.push(e.content);
         });
         this.fileList = [];
         this.show = false;

@@ -59,7 +59,7 @@
         this.$router.push({
           path: '/patient/consult/imageText',
           query: {
-            orderUuid: this.order.uuid
+            id: this.order.uuid
           }
         })
       }
