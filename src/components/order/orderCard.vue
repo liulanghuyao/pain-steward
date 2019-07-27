@@ -17,11 +17,18 @@
       <span class="fl">{{statusText[order.orderStatus]}}</span>
       <span class="fr">￥{{order.payMoney}}</span>
     </div>
+    <div class="order-card-footer border-t clearfix" :class="statusClass" v-if="type==2 && order.serviceType=='phone'">
+      <ll-tip circle msg="医生将在24小时内回电，请保持手机畅通"></ll-tip>
+    </div>
   </div>
 </template>
 
 <script>
+  import llTip from '@/components/llTip.vue'
   export default {
+    components: {
+      llTip
+    },
     props: {
       order: {
         type: Object,

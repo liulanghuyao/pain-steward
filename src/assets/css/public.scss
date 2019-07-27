@@ -150,18 +150,19 @@ body {
   box-shadow: inset 0 1px 0 0 #E8E8E8;
 }
 
-.van-tab {
-  font-size: 15px !important;
-  line-height: 56px !important;
+.tabs {
+  .van-tab {
+    font-size: 15px;
+    line-height: 56px;
+  }
+
+  &.van-tabs--line {
+    .van-tabs__wrap {
+      height: 56px;
+    }
+  }
 }
 
-.van-tabs--line {
-  padding-top: 56px !important;
-}
-
-.van-tabs--line .van-tabs__wrap {
-  height: 56px !important;
-}
 
 .van-search {
   padding: 8px 16px !important;

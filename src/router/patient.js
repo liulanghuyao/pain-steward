@@ -138,19 +138,24 @@ export default [{
     name: 'consultList',
     component: consultList,
     meta: {
-      title: '咨询'
+      title: '咨询',
+      keepAlive: true
     }
   }, {
     path: 'personal',
     name: 'personal',
     component: personal,
     meta: {
-      title: '我的'
+      title: '我的',
+      keepAlive: true
     }
   }, {
     path: '',
     name: 'patientHome',
-    component: home
+    component: home,
+    meta: {
+      keepAlive: true
+    }
   }],
   meta: {
     keepAlive: true

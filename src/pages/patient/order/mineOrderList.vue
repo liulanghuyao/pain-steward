@@ -35,6 +35,7 @@
           this.pullLoading = true;
           this.pages.offset = 0;
         }
+        this.upLoading = true;
         this.$http.post('wx/auth/order/query', this.pages).then(data => {
           this.pages.offset++;
           if (data.rows) {
@@ -42,7 +43,7 @@
               this.list = [];
             }
             this.list = [...this.list, ...data.rows];
-            if (this.pages.offset >= Math.ceil(data.total / 10)) {
+            if (this.pages.offset >= Math.ceil(data.total / this.pages.limit)) {
               this.finished = true;
             }
           }

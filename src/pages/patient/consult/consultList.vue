@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
-    <van-tabs v-model="active" @change="changeTab" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A" color="#0CD5A9">
+    <van-tabs class="tabs" v-model="active" @change="changeTab" title-active-color="#0CD5A9" title-inactive-color="#0F1F3A"
+      color="#0CD5A9">
       <van-tab title="图文咨询">
         <div class="consult-content">
           <order-card v-for="(item, index) in list" :key="index" :order="item" :type="2" @click.native="goTo(item)"></order-card>
@@ -48,6 +49,7 @@
           this.pullLoading = true;
           this.pages.offset = 0;
         }
+        this.upLoading = true;
         this.$http.post('/wx/auth/order/query', this.pages).then(data => {
           this.pages.offset++;
           if (data.rows) {
@@ -55,7 +57,7 @@
               this.list = [];
             }
             this.list = [...this.list, ...data.rows];
-            if (this.pages.offset >= Math.ceil(data.total / 10)) {
+            if (this.pages.offset >= Math.ceil(data.total / this.pages.limit)) {
               this.finished = true;
             }
           }
@@ -63,8 +65,8 @@
           this.upLoading = false;
         });
       },
-      changeTab(type){
-        this.getList();
+      changeTab(type) {
+        this.getList(true);
       },
       goTo(order) {
         let url = '';
@@ -85,7 +87,7 @@
     },
     watch: {
       active(newValue, oldValue) {
-        if(newValue == 0) {
+        if (newValue == 0) {
           this.pages.serviceType = 'image';
         } else {
           this.pages.serviceType = 'phone'
