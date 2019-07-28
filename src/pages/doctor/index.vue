@@ -21,7 +21,7 @@
       }
     },
     created() {
-      this.$store.dispatch('login/setLoginType', 'patient');
+      this.$store.dispatch('login/setLoginType', 'doctors');
     },
     methods: {
       setIndex(active) {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import patient from './patient';
+import doctor from './doctor';
 import login from '@/pages/login/login'
 import findPassword from '@/pages/login/findPassword'
 import setPassword from '@/pages/login/setPassword'
@@ -56,6 +57,7 @@ let option = {
 }
 
 option.routes = option.routes.concat(patient);
+option.routes = option.routes.concat(doctor);
 
 let router = new Router(option);
 

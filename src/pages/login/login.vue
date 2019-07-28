@@ -41,14 +41,24 @@
       login() {
         this.$http.post('wx/api/login', this.dataForm).then(data => {
           this.$store.dispatch('login/login', data.Authorization);
-          this.$http.get('wx/auth/patient/patientInfo').then(data => {
-            if (data.data) {
-              this.$store.dispatch('login/setUser', data.data);
-              this.$router.go(-1);
-            } else {
-              this.$router.replace('/fill-message');
-            }
-          })
+          this.$store.dispatch('login/setUser', data.user);
+          if (data.user.type == 'patient') {
+            this.$http.get('wx/auth/patient/patientInfo').then(data => {
+              if (data.data) {
+                this.$store.dispatch('login/setUserInfo', data.data);
+                this.$router.go(-1);
+              } else {
+                this.$router.replace('/fill-message');
+              }
+            });
+          } else if (data.user.type == 'doctors') {
+            this.$http.get('wx/auth/doctor/doctorInfo').then(data => {
+              if (data.data) {
+                this.$store.dispatch('login/setUserInfo', data.data);
+                this.$router.go(-1);
+              } else {}
+            });
+          }
         }).catch(err => {
           this.$toast(err.msg);
         });

@@ -43,7 +43,7 @@
           smsCode: '',
           password: '',
           rePassword: '',
-          type: 'patient'
+          type: this.$storage.getItem('loginType')
         },
         btnDisabled: false,
         smsDisabled: false,
@@ -94,9 +94,7 @@
             this.smsDisabled = false;
           }
         }, 1000);
-        this.$http.get(`wx/api/sendSms/${this.dataForm.mobilephone}/REGISTER`).then(data => {}).catch(err => {
-          this.dataForm.smsCode = err.code;
-        })
+        this.$http.get(`wx/api/sendSms/${this.dataForm.mobilephone}/REGISTER`).then(data => {}).catch(err => {});
       },
       register() {
         if (!this.validate(2)) {

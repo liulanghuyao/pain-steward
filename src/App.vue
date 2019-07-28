@@ -49,14 +49,25 @@
         }
       },
       getUser() {
-        if (this.$storage.getItem('Authorization')) {
+        if (this.$storage.getItem('Authorization') && this.$storage.getItem('user')) {
           this.$store.dispatch('login/login');
-          let user = this.$storage.getItem('user');
-          if (user) {
-            this.$store.dispatch('login/setUser', user);
-          } else {
-            this.$router.push('/fill-message');
+          if (this.$storage.getItem('user').type == 'patient') {
+            this.$http.get('wx/auth/patient/patientInfo').then(data => {
+              if (data.data) {
+                this.$store.dispatch('login/setUserInfo', data.data);
+              } else {
+                this.$router.replace('/fill-message');
+              }
+            });
+          } else if (this.$storage.getItem('user').type == 'doctors') {
+            this.$http.get('wx/auth/doctor/doctorInfo').then(data => {
+              if (data.data) {
+                this.$store.dispatch('login/setUserInfo', data.data);
+              } else {}
+            });
           }
+        } else {
+          this.$storage.removeItem('user');
         }
       }
     },
