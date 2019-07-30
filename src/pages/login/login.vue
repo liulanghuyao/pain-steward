@@ -48,7 +48,7 @@
                 this.$store.dispatch('login/setUserInfo', data.data);
                 this.$router.go(-1);
               } else {
-                this.$router.replace('/fill-message');
+                this.$router.replace('/patient/fill-message');
               }
             });
           } else if (data.user.type == 'doctors') {

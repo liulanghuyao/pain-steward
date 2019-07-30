@@ -6,9 +6,9 @@
       </keep-alive>
     </mo-content>
     <van-tabbar v-model="active" active-color="#0CD5A9" inactive-color="#98A0A0">
-      <van-tabbar-item icon="home-o" @click="goTo('/patient')">首页</van-tabbar-item>
-      <van-tabbar-item icon="chat" @click="goTo('/patient/consult/list')">咨询</van-tabbar-item>
-      <van-tabbar-item icon="manager" @click="goTo('/patient/personal')">我的</van-tabbar-item>
+      <van-tabbar-item icon="chat" @click="goTo('/doctor')">咨询</van-tabbar-item>
+      <van-tabbar-item icon="home-o" @click="goTo('/order/mineList')">订单</van-tabbar-item>
+      <van-tabbar-item icon="manager" @click="goTo('/doctor/personal')">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

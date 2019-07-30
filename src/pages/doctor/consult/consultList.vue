@@ -38,7 +38,7 @@
       }
     },
     activated() {
-      this.$emit('setIndex', 1);
+      this.$emit('setIndex', 0);
     },
     created() {
       if (this.$store.getters['login/isLogin']) {

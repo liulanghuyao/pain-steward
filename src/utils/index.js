@@ -218,6 +218,7 @@ function addState(fn) {
 function removeState() {
   history.go(-1);
   store.dispatch('route/setPushState', false);
+  store.dispatch('route/setPushStateFn', null);
 }
 
 export default {
@@ -238,5 +239,5 @@ export default {
   getRequest,
   setState,
   addState,
-  removeState
+  removeState,
 }

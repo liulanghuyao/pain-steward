@@ -157,6 +157,7 @@ body {
   }
 
   &.van-tabs--line {
+    padding-top: 56px;
     .van-tabs__wrap {
       height: 56px;
     }
@@ -224,4 +225,8 @@ body {
       height: 70px;
     }
   }
+}
+
+.btn-box {
+  margin: 48px 16px 28px;
 }

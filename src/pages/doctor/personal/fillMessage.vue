@@ -8,24 +8,20 @@
         <ll-cell title="性别" icon="down" @click.native="showSex=true">
           <input v-model="dataForm.sex" type="text" slot="value" placeholder="请选择" readonly="readonly">
         </ll-cell>
-        <ll-cell title="身份证号码">
-          <input v-model="dataForm.idcard" type="text" slot="value" placeholder="请输入身份证号码">
-        </ll-cell>
-        <ll-cell title="出生年月日" icon="down" @click.native="showAge=true">
-          <input v-model="dataForm.age" type="text" slot="value" placeholder="请选择" readonly="readonly">
-        </ll-cell>
-        <ll-cell title="所在地" icon="down" @click.native="showDistrict=true">
+        <ll-cell title="地区" icon="down" @click.native="showDistrict=true">
           <input v-model="dataForm.region" type="text" slot="value" placeholder="请选择" readonly="readonly">
         </ll-cell>
-        <ll-cell title="详细地址">
-          <input v-model="dataForm.address" type="text" slot="value" placeholder="请输入详细地址">
+        <ll-cell title="医院">
+          <input v-model="dataForm.address" type="text" slot="value" placeholder="请输入医院名称">
         </ll-cell>
-        <ll-cell title="联系电话">
-          <input v-model="dataForm.phone" type="number" slot="value" placeholder="请输入联系电话,便于医生联系">
+        <ll-cell title="科室">
+          <input v-model="dataForm.phone" type="number" slot="value" placeholder="请输入科室名称">
+        </ll-cell>
+        <ll-cell title="职称">
+          <input v-model="dataForm.phone" type="number" slot="value" placeholder="请输入职称">
         </ll-cell>
       </ll-box>
       <div class="bottom">
-        <ll-tip circle msg="注：此信息仅您和医生可见。为了给您带来更准确的医疗服务，请您务必填写真实资料。一旦信息建立，将无法编辑和删除，请确认无误后提交。"></ll-tip>
         <van-button type="primary" class="btn btn-block" @click="save()" :disabled="btnDisabled">完成注册</van-button>
       </div>
       <van-popup v-model="showSex" position="bottom">
@@ -61,8 +57,6 @@
           province: '湖南省',
           phone: ''
         },
-        now: new Date(),
-        minDate: new Date(1900, 1, 1),
         btnDisabled: false,
         showSex: false,
         showAge: false,
@@ -117,10 +111,10 @@
         if (!this.validate()) {
           return;
         }
-        this.$http.postJson('wx/auth/patient/savePatientInfo', this.dataForm, 1).then(data => {
+        this.$http.postJson('wx/auth/doctor/saveDoctorInfo', this.dataForm, 1).then(data => {
           this.$http.get('wx/auth/patient/patientInfo').then(data => {
             if (data.data) {
-              this.$store.dispatch('login/setUser', data.data);
+              this.$store.dispatch('login/setUserInfo', data.data);
               this.$router.go(-1);
             }
           });

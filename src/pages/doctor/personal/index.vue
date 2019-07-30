@@ -16,9 +16,10 @@
       </div>
     </ll-box>
     <ll-box :style="{padding:0}">
-      <ll-cell title="基本信息" icon class="pd-lr" @click.native="$router.push('/patient/personal/message')"></ll-cell>
-      <ll-cell title="订单记录" icon class="pd-lr" @click.native="$router.push('/patient/order/mineList')"></ll-cell>
-      <ll-cell title="平台介绍" icon class="pd-lr" @click.native="$router.push('')"></ll-cell>
+      <ll-cell title="执业认证" value="请尽快完善提交审核" valueClass="c-orange f-13" icon class="pd-lr" @click.native="$router.push('/doctor/personal/kill')"></ll-cell>
+      <ll-cell title="服务设置" icon class="pd-lr" @click.native="$router.push('/patient/order/mineList')"></ll-cell>
+      <ll-cell title="收益管理" icon class="pd-lr" @click.native="$router.push('')"></ll-cell>
+      <ll-cell title="账户设置" icon class="pd-lr" @click.native="$router.push('')"></ll-cell>
     </ll-box>
     <div class="btn-box" v-if="this.$store.getters['login/isLogin']">
       <van-button plain type="warning" class="btn btn-block" @click="logout()">退出登录</van-button>
@@ -108,6 +109,10 @@
 
     .btn-box {
       margin: 48px 24px 28px;
+    }
+    
+    .f-13 {
+      font-size: 13px;
     }
   }
 </style>

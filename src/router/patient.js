@@ -1,6 +1,7 @@
 import index from '@/pages/patient/index'
 import home from '@/pages/patient/home/home'
 import consultList from '@/pages/patient/consult/consultList'
+import fillMessage from '@/pages/patient/personal/fillMessage'
 import buyConsult from '@/pages/patient/consult/buyConsult'
 import payConsult from '@/pages/patient/consult/payConsult'
 import payResultConsult from '@/pages/patient/consult/payResultConsult'
@@ -19,7 +20,6 @@ import mineReportList from '@/pages/patient/report/mineReportList';
 
 export default [{
   path: '/patient/report/mineList',
-  name: 'mineReportList',
   component: mineReportList,
   meta: {
     title: '我的报告',
@@ -27,7 +27,6 @@ export default [{
   }
 }, {
   path: '/patient/analgesia/explainDetail',
-  name: 'explainDetail',
   component: explainDetail,
   meta: {
     title: '微创镇痛技术',
@@ -35,7 +34,6 @@ export default [{
   }
 }, {
   path: '/patient/analgesia/broadHeading',
-  name: 'broadHeading',
   component: broadHeading,
   meta: {
     title: '微创镇痛技术',
@@ -43,7 +41,6 @@ export default [{
   }
 }, {
   path: '/patient/evaluate/today',
-  name: 'today',
   component: today,
   meta: {
     title: '今日评估',
@@ -51,7 +48,6 @@ export default [{
   }
 }, {
   path: '/patient/evaluate/everyday',
-  name: 'everyday',
   component: everyday,
   meta: {
     title: '每日评估',
@@ -59,7 +55,6 @@ export default [{
   }
 }, {
   path: '/patient/archives/healthy',
-  name: 'healthy',
   component: healthy,
   meta: {
     title: '健康档案',
@@ -67,7 +62,6 @@ export default [{
   }
 }, {
   path: '/patient/consult/imageText',
-  name: 'imageTextConsult',
   component: imageTextConsult,
   meta: {
     title: '图文咨询',
@@ -75,7 +69,6 @@ export default [{
   }
 }, {
   path: '/patient/consult/payResultConsult',
-  name: 'payResultConsult',
   component: payResultConsult,
   meta: {
     title: '订单详情',
@@ -83,7 +76,6 @@ export default [{
   }
 }, {
   path: '/patient/consult/payConsult',
-  name: 'payConsult',
   component: payConsult,
   meta: {
     title: '确认支付',
@@ -91,7 +83,6 @@ export default [{
   }
 }, {
   path: '/patient/consult/buyConsult',
-  name: 'buyConsult',
   component: buyConsult,
   meta: {
     title: '购买咨询',
@@ -99,7 +90,6 @@ export default [{
   }
 }, {
   path: '/patient/doctor/doctorDetail',
-  name: 'doctorDetail',
   component: doctorDetail,
   meta: {
     title: '医生主页',
@@ -107,7 +97,6 @@ export default [{
   }
 }, {
   path: '/patient/doctor/doctorList',
-  name: 'doctorList',
   component: doctorList,
   meta: {
     title: '专家团队',
@@ -115,7 +104,6 @@ export default [{
   }
 }, {
   path: '/patient/order/mineList',
-  name: 'mineOrderList',
   component: mineOrderList,
   meta: {
     title: '订单记录',
@@ -123,19 +111,25 @@ export default [{
   }
 }, {
   path: '/patient/personal/message',
-  name: 'personalMessage',
   component: personalMessage,
   meta: {
     title: '我的资料',
     rank: 1
   }
 }, {
+  path: '/patient/fill-message',
+  component: fillMessage,
+  meta: {
+    title: '基本信息',
+    rank: 1
+  }
+}, {
   path: '/patient',
-  name: 'index',
+  name: 'patientIndex',
   component: index,
   children: [{
     path: 'consult/list',
-    name: 'consultList',
+    name: 'patientConsultList',
     component: consultList,
     meta: {
       title: '咨询',
@@ -143,7 +137,7 @@ export default [{
     }
   }, {
     path: 'personal',
-    name: 'personal',
+    name: 'patientPersonalIndex',
     component: personal,
     meta: {
       title: '我的',

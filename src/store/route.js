@@ -2,6 +2,7 @@ const state = {
   route: {},
   pushState: false,
   pushStateFn: function() {},
+  keepAlives: []
 };
 const getters = {
   getRoute(state) {
@@ -21,6 +22,9 @@ const getters = {
   },
   getPushStateFn(state) {
     return state.pushStateFn;
+  },
+  getKeepAlives(state) {
+    return state.keepAlives;
   }
 };
 const mutations = {
@@ -33,6 +37,9 @@ const mutations = {
   setPushStateFn(state, item) {
     state.pushStateFn = item;
   },
+  setKeepAlives(state, item) {
+    state.keepAlives = item;
+  }
 };
 const actions = {
   setRoute(context, item) {
@@ -43,6 +50,9 @@ const actions = {
   },
   setPushStateFn(context, item) {
     context.commit('setPushStateFn', item);
+  },
+  setKeepAlives(context, item) {
+    context.commit('setKeepAlives', item);
   }
 };
 export default {

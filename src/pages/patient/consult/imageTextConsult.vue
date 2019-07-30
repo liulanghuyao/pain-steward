@@ -4,7 +4,7 @@
       <ll-box :style="{'border-radius':'6px'}">
         <ll-tip msg="您可以先发出想咨询的问题，医生将会在24小时内回复您的咨询。若医生未在24小时内回复，系统将自动关闭本次咨询并自动为您退款。"></ll-tip>
       </ll-box>
-      <div class="time">6月18 18:12:33</div>
+      <div class="time">{{getTime}}</div>
       <div class="msg-box" :class="{left:item.createdType=='doctor'}" v-for="(item, index) in msgs" :key="index">
         <div class="head"></div>
         <div class="box clearfix">
@@ -50,7 +50,10 @@
         pages: {
           offset: 0,
           limit: 10,
-          roomUuid: this.$route.query.id
+          roomUuid: this.$route.query.id,
+          smsType: 'HISTORY',
+          smsTime: this.$utils.formatDate(),
+          params: {}
         }
       }
     },
@@ -106,7 +109,7 @@
         })
       },
       getOldMsg() {
-        this.$http.get('wx/auth/advisoryRoom/chatContents', this.pages).then(data => {
+        this.$http.get('/wx/auth/advisoryRoom/chatContents', this.pages).then(data => {
           if (data.rows) {
             this.msgs = [...this.msgs, ...data.rows];
           }
@@ -126,6 +129,9 @@
       showBtn() {
         return this.$utils.isEmpty(this.text) && !this.fileList.length;
       },
+      getTime(){
+        return this.$utils.formatDate(new Date(), 'M月d日 h:m:s');
+      }
     },
     beforeDestroy() {
       clearInterval(this.interval);
@@ -153,7 +159,7 @@
     }
 
     .time {
-      width: 120px;
+      max-width: 130px;
       margin: 16px auto;
       padding: 2px 8px;
       background: #fff;

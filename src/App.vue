@@ -1,13 +1,13 @@
 <template>
   <div id="app" :class="app">
-    <transition :name="transitionName">
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" />
+    <transition :name="transitionName" class="">
+      <keep-alive :include="keepAlive">
+        <router-view/>
       </keep-alive>
     </transition>
-    <transition :name="transitionName">
+    <!-- <transition :name="transitionName">
       <router-view v-if="!$route.meta.keepAlive" />
-    </transition>
+    </transition> -->
     <ll-loading></ll-loading>
   </div>
 </template>
@@ -34,6 +34,11 @@
       this.getUser();
       this.$store.dispatch('route/setRoute', this.$route);
     },
+    computed:{
+      keepAlive(){
+        return this.$store.getters['route/getKeepAlives'];
+      }
+    },
     methods: {
       setSdk() {
         if (window.plus) {
@@ -56,7 +61,7 @@
               if (data.data) {
                 this.$store.dispatch('login/setUserInfo', data.data);
               } else {
-                this.$router.replace('/fill-message');
+                this.$router.replace('/patient/fill-message');
               }
             });
           } else if (this.$storage.getItem('user').type == 'doctors') {
@@ -112,24 +117,25 @@
     transition-timing-function: linear;
     position: fixed;
     width: 100vw;
-    top: 0;
-    bottom: 0;
+    height: 100vh;
   }
 
-  /*  .slide-right-enter {
-    transform: translate3d(-100%, 0, 0);
-  } */
+  .slide-right-leave {
+    transform: translate3d(0, 0, 0);
+    z-index: 99;
+  }
 
-  .slide-right-leave-active {
+  .slide-right-leave-to {
     transform: translate3d(100%, 0, 0);
     z-index: 99;
   }
 
   .slide-left-enter {
     transform: translate3d(100%, 0, 0);
+    z-index: 99;
   }
 
-  /*  .slide-left-leave-active {
-    transform: translate3d(-100%, 0, 0);
-  } */
+  .slide-left-enter-to {
+    transform: translate3d(0, 0, 0);
+  }
 </style>

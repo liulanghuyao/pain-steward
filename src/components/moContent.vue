@@ -5,7 +5,9 @@
         <slot></slot>
       </van-list>
     </van-pull-refresh>
-    <slot v-if="!isList" class="mo-content-center"></slot>
+    <div v-if="!isList" class="mo-content-center">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,10 @@
       isList: {
         type: Boolean,
         default: false
+      },
+      noLogin: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -36,7 +42,13 @@
     created() {},
     methods: {
       getList(refresh) {
-        this.$emit('getList', refresh);
+        if (this.noLogin) {
+          if (this.$store.getters['login/isLogin']) {
+            this.$emit('getList', refresh);
+          }
+        } else {
+          this.$emit('getList', refresh);
+        }
       }
     },
     computed: {
@@ -78,7 +90,7 @@
         height: 100%;
       }
     }
-    
+
     .mo-content-center {
       padding: 0 0 20px;
     }

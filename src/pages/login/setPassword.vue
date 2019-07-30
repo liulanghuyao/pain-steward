@@ -37,7 +37,7 @@
     methods: {
       submit() {
         if (this.$route.query.from == 1) {
-          this.$router.push('/fill-message');
+          this.$router.push('/patient/fill-message');
         } else {
 
         }

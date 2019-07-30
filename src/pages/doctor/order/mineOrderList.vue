@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
-    <mo-content class="mo-content" :isList="true" :pullLoading="pullLoading" :upLoading="upLoading" :finished="finished"
-      @getList="getList" :noLogin="true">
+    <mo-content class="mo-content" :isList="true" noLogin :pullLoading="pullLoading" :upLoading="upLoading" :finished="finished"
+      @getList="getList">
       <order-card v-for="(item, index) in list" :key="index" :order="item" @click.native="goTo(item)"></order-card>
     </mo-content>
   </div>
@@ -25,6 +25,9 @@
         finished: false,
         list: []
       }
+    },
+    activated() {
+      this.$emit('setIndex', 1);
     },
     created() {
 
