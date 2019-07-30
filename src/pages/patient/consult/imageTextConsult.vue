@@ -53,8 +53,8 @@
           roomUuid: this.$route.query.id,
           smsType: 'HISTORY',
           smsTime: this.$utils.formatDate(),
-          params: {}
-        }
+        },
+        lastTime: this.$utils.formatDate()
       }
     },
     created() {
@@ -79,23 +79,12 @@
         this.fileList.forEach((e, i) => {
           dataForm.append('files', e.file);
         })
-        this.$http.postForm('wx/auth/advisoryRoom/chat', dataForm);
-        if (this.text) {
-          this.msgs.push({
-            type: 1,
-            who: 1,
-            text: this.text,
-          });
-          this.text = '';
-        } else if (this.fileList.length) {
-          this.msgs.push({
-            type: 2,
-            who: 1,
-            img: this.fileList[0].content,
-          });
-        }
+        this.$http.postForm('wx/auth/advisoryRoom/chat', dataForm).then(data => {
+          clearTimeout(this.timeout);
+          this.getNewMsg(true);
+        });
+        this.text = '';
         this.closeFileBox();
-        this.goToBottom();
       },
       openImg(index) {
         ImagePreview({
@@ -109,16 +98,28 @@
         })
       },
       getOldMsg() {
-        this.$http.get('/wx/auth/advisoryRoom/chatContents', this.pages).then(data => {
+        this.$http.post('/wx/auth/advisoryRoom/chatContents', this.pages).then(data => {
           if (data.rows) {
-            this.msgs = [...this.msgs, ...data.rows];
+            this.msgs = [...data.rows, ...this.msgs];
           }
         });
       },
-      getNewMsg() {
-        this.interval = setInterval(() => {
-          //this.getOldMsg();
-        }, 3000)
+      getNewMsg(bottom) {
+        this.$http.post('/wx/auth/advisoryRoom/chatContents', {
+          offset: 0,
+          limit: 100,
+          roomUuid: this.$route.query.id,
+          smsType: 'NEW',
+          smsTime: this.lastTime,
+        }).then(data => {
+          if (data.rows && data.rows.length) {
+            this.msgs = [...this.msgs, ...data.rows];
+            this.goToBottom();
+          }
+          this.timeout = setTimeout(() => {
+            this.getNewMsg(bottom);
+          }, 4000)
+        });
       },
       closeFileBox() {
         this.showFileBox = false;
@@ -129,12 +130,12 @@
       showBtn() {
         return this.$utils.isEmpty(this.text) && !this.fileList.length;
       },
-      getTime(){
+      getTime() {
         return this.$utils.formatDate(new Date(), 'M月d日 h:m:s');
       }
     },
     beforeDestroy() {
-      clearInterval(this.interval);
+      clearTimeout(this.timeout);
     },
     watch: {
       msgs(newValue, oldValue) {
@@ -145,6 +146,9 @@
             e.imgIndex = imgIndex;
             this.imgs.push(this.$http.baseUrl + e.advisoryContent);
             imgIndex++;
+          }
+          if (i == this.msgs.length - 1) {
+            this.lastTime = e.createdTime;
           }
         })
       },
